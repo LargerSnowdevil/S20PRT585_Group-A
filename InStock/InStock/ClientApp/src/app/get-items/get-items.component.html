@@ -14,8 +14,8 @@
       <th>Price</th>
       <th>Available</th>
       <th>Quantity</th>
-      <!-- <th></th>
-      <th></th> -->
+      <th></th>
+      <th></th>
       
     </tr>
   </thead>
@@ -25,7 +25,7 @@
       <!-- <td><a [routerLink]="['/blogpost/', blogPost.postId]">{{ blogPost.title }}</a></td> -->
       <td>{{ item.name }}</td>
       <td>{{ item.sku }}</td>
-      <td>{{ item.price }}</td>
+      <td>{{"$" + item.price }}</td>
       <td>{{ item.inStock }}</td>
       <td>{{ item.quantity }}</td>
       <!-- <td><a [routerLink]="['/blogpost/edit/', blogPost.postId]" class="btn btn-primary btn-sm float-right">Edit</a></td>

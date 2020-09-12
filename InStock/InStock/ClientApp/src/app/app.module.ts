@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { GetItemsComponent } from './get-items/get-items.component';
 import { ItemsService} from './services/items.service';
 @NgModule({
@@ -16,8 +14,6 @@ import { ItemsService} from './services/items.service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     GetItemsComponent
   ],
   imports: [
@@ -26,7 +22,6 @@ import { ItemsService} from './services/items.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'get-items', component: GetItemsComponent },
     ])
   ],
