@@ -27,6 +27,17 @@ namespace InStock.Controllers
         {
             return await _context.Items.ToListAsync();
         }
+        [HttpGet("search/{name}")]
+        public async Task<ActionResult<Item>> Search(string name)
+        {
+            IQueryable<Item> query = _context.Items;
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(e => e.Name.Contains(name));
+            }
+            IEnumerable<Item> results = await query.ToListAsync();
+            return Ok(results);
+        }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
@@ -106,5 +117,8 @@ namespace InStock.Controllers
         {
             return _context.Items.Any(e => e.Id == id);
         }
+
+
+
     }
 }
