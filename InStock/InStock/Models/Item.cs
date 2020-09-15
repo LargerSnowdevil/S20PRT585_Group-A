@@ -21,7 +21,7 @@ namespace InStock.Models
             public int SKU { get; set; }
             [Required]
             public int Price { get; set; }
-            public bool InStock { get; set; }
+            public string InStock { get; set; }
 
             [Required]
             [Column(TypeName = "varchar(16)")]

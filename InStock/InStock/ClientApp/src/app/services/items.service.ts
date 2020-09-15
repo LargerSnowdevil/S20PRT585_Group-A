@@ -28,6 +28,37 @@ export class ItemsService {
       catchError(this.errorHandler)
     );
   }
+  getItemById(itemId: number): Observable<Items> {
+    return this.http.get<Items>(this.myAppUrl + this.myApiUrl + itemId)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+}
+
+addItem(item): Observable<Items> {
+  return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.errorHandler)
+  );
+}
+
+editItemById(itemId: number, item): Observable<Items> {
+  return this.http.put<Items>(this.myAppUrl + this.myApiUrl + itemId, JSON.stringify(item), this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.errorHandler)
+  );
+}
+  
+deleteItem(itemId: number): Observable<Items> {
+  return this.http.delete<Items>(this.myAppUrl + this.myApiUrl + itemId)
+  .pipe(
+    retry(1),
+    catchError(this.errorHandler)
+  );
+}
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

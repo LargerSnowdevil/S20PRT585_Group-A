@@ -1,7 +1,7 @@
 export class Items {
     id?: number;
     name: string;
-    SKU: number;
+    sku: number;
     price: number;
     inStock: boolean;
     quantity: number
