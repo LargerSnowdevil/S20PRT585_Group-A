@@ -1,0 +1,6 @@
+shops
+    shoplist component ts/css/html
+    shop component ts/css/html
+shared 
+    shop service 
+    shop model

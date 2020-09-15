@@ -1,0 +1,28 @@
+<!--autocomplete is function of prompt-->
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="ShopID" #ShopID="ngModel" [(ngModel)]="service.formData.ShopID">
+    <div class="form-group">
+      <label>SHOP NAME</label>
+      <input name="ShopName" #ShopName="ngModel" [(ngModel)]="service.formData.ShopName" class="form-control" required>
+      <div class="validation-error" *ngIf="ShopName.invalid && ShopName.touched">This field is required.</div>
+    </div>
+    <div class="form-group">
+      <label>ADDRESS</label>
+      <input name="Address" #Address="ngModel" [(ngModel)]="service.formData.Address" class="form-control">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>PRODUCT</label>
+        <input name="Product" #Product="ngModel" [(ngModel)]="service.formData.Product" class="form-control">
+      </div>
+      <div class="form-group  col-md-6">
+        <label>CONTACT</label>
+        <input name="Contact" #Contact="ngModel" [(ngModel)]="service.formData.Contact" class="form-control">
+      </div>
+      
+    </div>
+    <div class="form-group">
+        <!--if form is invalid, button is invalid-->
+      <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+    </div>
+  </form>
