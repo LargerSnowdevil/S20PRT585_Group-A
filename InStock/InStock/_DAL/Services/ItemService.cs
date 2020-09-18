@@ -1,4 +1,5 @@
-﻿using InStock._DAL.Models;
+﻿using InStock._BLL.Models;
+using InStock._DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,13 @@ namespace InStock._DAL.Services
 {
     public interface IItemService
     {
-        IEnumerable<Item> GetItems();
-        Task<Item> Search(string name);
-        Item GetItem(int id);
-        Task<Item> PutItem(int id, Item item);
+        IEnumerable<ItemBll> GetItems();
+        Task<ItemBll> Search(string name);
+        ItemBll GetItem(int id);
+        Task<ItemBll> PutItem(int id, Item item);
 
-        Task<Item> DeleteItem(int id);
-        Task<Item> PostItem(Item item);
+        Task<ItemBll> DeleteItem(int id);
+        Task<ItemBll> PostItem(Item item);
 
 
     }
@@ -28,36 +29,85 @@ namespace InStock._DAL.Services
             _context = context;
         }
 
-        public Task<Item> DeleteItem(int id)
+        public Task<ItemBll> DeleteItem(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Item GetItem(int id)
+        public ItemBll GetItem(int id)
         {
-            var item = _context.Items.Find(id);
+            var efItem = _context.Items.Find(id);
+            var efShop = _context.Shops.Find(efItem.ShopId);
 
-            return item;
+            var retItem = new ItemBll
+            {
+                Id = efItem.Id,
+                Name = efItem.Name,
+                SKU = efItem.SKU,
+                Price = efItem.Price,
+                InStock = efItem.InStock,
+                Quantity = efItem.Quantity,
+                Shop = new ShopBll
+                {
+                    ShopId = efShop.ShopId,
+                }
+            };
+
+            return retItem;
         }
 
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<ItemBll> GetItems()
         {
-            var items = _context.Items.ToList();
+            var efItems = _context.Items.ToList();
+            var retItems = new List<ItemBll>();
 
+            foreach (var item in efItems)
+            {
+                var efShop = _context.Shops.Find(item.ShopId);
 
+                retItems.Add(new ItemBll
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    SKU = item.SKU,
+                    Price = item.Price,
+                    InStock = item.InStock,
+                    Quantity = item.Quantity,
+                    Shop = new ShopBll
+                    {
+                        ShopId = efShop.ShopId,
+                    }
+                });
+            }
+
+            return retItems;
         }
 
-        public Task<Item> PostItem(Item item)
+        public async Task PostItem(ItemBll item)
+        {
+            //Todo ensure this method runs correctly im not great with async calls
+            var shop = _context.Shops.Find(item.Shop.ShopId);
+            var efItem = new Item
+            {
+                Id = item.Id,
+                Name = item.Name,
+                SKU = item.SKU,
+                Price = item.Price,
+                InStock = item.InStock,
+                Quantity = item.Quantity,
+                Shop = shop
+            };
+
+            _context.Items.Add(efItem);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task<ItemBll> PutItem(int id, Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Item> PutItem(int id, Item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Item> Search(string name)
+        public Task<ItemBll> Search(string name)
         {
             throw new NotImplementedException();
         }

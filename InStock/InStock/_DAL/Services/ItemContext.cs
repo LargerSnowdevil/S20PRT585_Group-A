@@ -15,6 +15,8 @@ namespace InStock._DAL.Services
 
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Shop> Shops { get; set; }
+
 
     }
 }

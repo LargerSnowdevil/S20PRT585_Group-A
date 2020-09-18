@@ -8,6 +8,5 @@ namespace InStock._BLL.Models
     public class ShopBll
     {
         public int ShopId { get; set; }
-        public List<ItemBll> Items { get; set; }
     }
 }
