@@ -9,6 +9,8 @@ namespace InStock._DAL.Models
     {
         public int ShopId { get; set; }
 
+        public String Name { get; set; }
+
         public List<Item> Items { get; set; }
     }
 }

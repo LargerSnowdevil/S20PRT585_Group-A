@@ -33,7 +33,7 @@ namespace InStock._DAL.Services
             var item = _context.Items.Find(id);
             if (item != null)
             {
-                _context.Remove(id);
+                _context.Items.Remove(item);
                 await _context.SaveChangesAsync();
             }
             else

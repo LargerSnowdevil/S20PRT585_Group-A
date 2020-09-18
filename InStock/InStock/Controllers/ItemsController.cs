@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InStock._BLL.Services;
 using InStock._BLL.Models;
+using InStock._DAL.Models;
 
 namespace InStock.Controllers
 {
@@ -15,10 +16,12 @@ namespace InStock.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemServiceBll _itemService;
+        private readonly IShopServiceBll _shopService;
 
-        public ItemsController(IItemServiceBll service)
+        public ItemsController(IItemServiceBll itemService, IShopServiceBll shopService)
         {
-            _itemService = service;
+            _itemService = itemService;
+            _shopService = shopService;
         }
 
         // GET: api/Items
@@ -30,6 +33,7 @@ namespace InStock.Controllers
         [HttpGet("search/{name}")]
         public ActionResult<IEnumerable<ItemBll>> Search(string name)
         {
+            //Todo search currently is case sencitive change this later
             return _itemService.Search(name).ToList();
         }
 
@@ -82,11 +86,13 @@ namespace InStock.Controllers
             return item;
         }
 
-        public async Task<ActionResult<ItemBll>> AddShopSeed(ItemBll item)
+        [HttpPost("{shopName}")]
+        public async Task<ActionResult<Shop>> AddShopSeed(String shopName)
         {
-            await _itemService.PostItem(item);
+            var temp = new ShopBll() { Name =  shopName};
+            await _shopService.PostShop(temp);
 
-            return CreatedAtAction("GetItem", new { id = item.Id }, item);
+            return NoContent();
         }
     }
 }
