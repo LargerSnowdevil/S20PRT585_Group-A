@@ -10,12 +10,11 @@ namespace InStock._DAL.Services
     public interface IItemService
     {
         IEnumerable<ItemBll> GetItems();
-        Task<ItemBll> Search(string name);
         ItemBll GetItem(int id);
-        Task<ItemBll> PutItem(int id, Item item);
+        Task PutItem(int id, ItemBll item);
 
-        Task<ItemBll> DeleteItem(int id);
-        Task<ItemBll> PostItem(Item item);
+        Task DeleteItem(int id);
+        Task PostItem(ItemBll item);
 
 
     }
@@ -29,9 +28,18 @@ namespace InStock._DAL.Services
             _context = context;
         }
 
-        public Task<ItemBll> DeleteItem(int id)
+        public async Task DeleteItem(int id)
         {
-            throw new NotImplementedException();
+            var item = _context.Items.Find(id);
+            if (item != null)
+            {
+                _context.Remove(id);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                //Todo what happens if the item does not exist?
+            }
         }
 
         public ItemBll GetItem(int id)
@@ -102,15 +110,29 @@ namespace InStock._DAL.Services
             await _context.SaveChangesAsync();
         }
 
-        public Task<ItemBll> PutItem(int id, Item item)
+        public async Task PutItem(int id, ItemBll item)
         {
-            throw new NotImplementedException();
-        }
+            //Todo ensure this method runs correctly im not great with async calls
+            var efItem = _context.Items.Find(id);
+            var efShop = _context.Shops.Find(item.Shop.ShopId);
 
-        public Task<ItemBll> Search(string name)
-        {
-            throw new NotImplementedException();
+            if (efItem != null)
+            {
+                efItem.Name = item.Name;
+                efItem.SKU = item.SKU;
+                efItem.Price = item.Price;
+                efItem.InStock = item.InStock;
+                efItem.Quantity = item.Quantity;
+                efItem.Shop = efShop;
+
+                _context.Items.Update(efItem);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                //Todo What happens if an item does not exist?
+                //Do i need to return a failed task if the item does not exist?
+            }
         }
     }
-
 }
