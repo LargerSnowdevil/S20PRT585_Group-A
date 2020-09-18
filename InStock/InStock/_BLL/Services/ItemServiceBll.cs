@@ -1,4 +1,5 @@
-﻿using InStock._DAL.Models;
+﻿using InStock._BLL.Models;
+using InStock._DAL.Models;
 using InStock._DAL.Services;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ namespace InStock._BLL.Services
 {
     public interface IItemServiceBll
     {
-        Task<IEnumerable<Item>> GetItems();
-        Task<Item> Search(string name);
-        Task<Item> GetItem(int id);
-        Task<Item> PutItem(int id, Item item);
+        IEnumerable<ItemBll> GetItems();
+        IEnumerable<ItemBll> Search(string name);
+        ItemBll GetItem(int id);
+        Task PutItem(int id, Item item);
 
-        Task<Item> DeleteItem(int id);
-        Task<Item> PostItem(Item item);
+        Task DeleteItem(int id);
+        Task PostItem(Item item);
 
 
     }
@@ -29,34 +30,45 @@ namespace InStock._BLL.Services
             _itemService = service;
         }
 
-        public Task<Item> DeleteItem(int id)
+        public Task DeleteItem(int id)
         {
-            throw new NotImplementedException();
+            return _itemService.DeleteItem(id);
         }
 
-        public Task<Item> GetItem(int id)
+        public ItemBll GetItem(int id)
         {
-            throw new NotImplementedException();
+            return _itemService.GetItem(id);
         }
 
-        public Task<IEnumerable<Item>> GetItems()
+        public IEnumerable<ItemBll> GetItems()
         {
-            throw new NotImplementedException();
+            return _itemService.GetItems();
         }
 
-        public Task<Item> PostItem(Item item)
+        public Task PostItem(ItemBll item)
         {
-            throw new NotImplementedException();
+            return _itemService.PostItem(item);
         }
 
-        public Task<Item> PutItem(int id, Item item)
+        public Task PutItem(int id, ItemBll item)
         {
-            throw new NotImplementedException();
+            return _itemService.PutItem(id, item);
         }
 
-        public Task<Item> Search(string name)
+        public IEnumerable<ItemBll> Search(string name)
         {
-            throw new NotImplementedException();
+            var items = _itemService.GetItems();
+            var retItems = new List<ItemBll>();
+
+            foreach (var item in items)
+            {
+                if (item.Name.CompareTo(name) == 0)
+                {
+                    retItems.Add(item);
+                }
+            }
+
+            return retItems;
         }
     }
 
