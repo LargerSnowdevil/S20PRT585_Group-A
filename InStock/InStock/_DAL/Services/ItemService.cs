@@ -49,7 +49,7 @@ namespace InStock._DAL.Services
 
             var retItem = new ItemBll
             {
-                Id = efItem.Id,
+                Id = efItem.ItemId,
                 Name = efItem.Name,
                 SKU = efItem.SKU,
                 Price = efItem.Price,
@@ -75,7 +75,7 @@ namespace InStock._DAL.Services
 
                 retItems.Add(new ItemBll
                 {
-                    Id = item.Id,
+                    Id = item.ItemId,
                     Name = item.Name,
                     SKU = item.SKU,
                     Price = item.Price,
@@ -97,7 +97,7 @@ namespace InStock._DAL.Services
             var shop = _context.Shops.Find(item.Shop.ShopId);
             var efItem = new Item
             {
-                Id = item.Id,
+                ItemId = item.Id,
                 Name = item.Name,
                 SKU = item.SKU,
                 Price = item.Price,

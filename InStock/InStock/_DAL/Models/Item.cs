@@ -11,7 +11,7 @@ namespace InStock._DAL.Models
     {
        
             [Key]
-            public int Id { get; set; }
+            public int ItemId { get; set; }
 
             [Required]
             [Column(TypeName = "varchar(16)")]

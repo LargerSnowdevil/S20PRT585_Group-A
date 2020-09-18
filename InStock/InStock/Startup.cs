@@ -1,3 +1,4 @@
+using InStock._BLL.Services;
 using InStock._DAL.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,9 @@ namespace InStock
 
             services.AddDbContext<ItemContext>(optionns =>
             optionns.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemServiceBll, ItemServiceBll>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });

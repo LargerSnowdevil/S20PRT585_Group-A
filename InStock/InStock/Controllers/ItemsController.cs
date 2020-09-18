@@ -14,9 +14,9 @@ namespace InStock.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly ItemServiceBll _itemService;
+        private readonly IItemServiceBll _itemService;
 
-        public ItemsController(ItemServiceBll service)
+        public ItemsController(IItemServiceBll service)
         {
             _itemService = service;
         }
@@ -80,6 +80,13 @@ namespace InStock.Controllers
             await _itemService.DeleteItem(id);
 
             return item;
+        }
+
+        public async Task<ActionResult<ItemBll>> AddShopSeed(ItemBll item)
+        {
+            await _itemService.PostItem(item);
+
+            return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }
     }
 }

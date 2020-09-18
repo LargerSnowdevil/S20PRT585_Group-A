@@ -13,19 +13,19 @@ namespace InStock._BLL.Services
         IEnumerable<ItemBll> GetItems();
         IEnumerable<ItemBll> Search(string name);
         ItemBll GetItem(int id);
-        Task PutItem(int id, Item item);
+        Task PutItem(int id, ItemBll item);
 
         Task DeleteItem(int id);
-        Task PostItem(Item item);
+        Task PostItem(ItemBll item);
 
 
     }
 
     public class ItemServiceBll : IItemServiceBll
     {
-        private readonly ItemServiceBll _itemService;
+        private readonly IItemService _itemService;
 
-        public ItemServiceBll(ItemServiceBll service)
+        public ItemServiceBll(IItemService service)
         {
             _itemService = service;
         }
