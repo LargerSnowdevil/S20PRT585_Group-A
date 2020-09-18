@@ -1,11 +1,11 @@
-﻿using InStock.Models;
+﻿using InStock._DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InStock.Data
+namespace InStock._DAL.Services
 {
     public class ItemContext : DbContext
     {

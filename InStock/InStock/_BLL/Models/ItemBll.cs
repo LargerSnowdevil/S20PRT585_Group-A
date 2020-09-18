@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InStock.Models
+namespace InStock._BLL.Models
 {
-    public class Item
+    public class ItemBll
     {
        
             [Key]
@@ -21,11 +21,17 @@ namespace InStock.Models
             public int SKU { get; set; }
             [Required]
             public int Price { get; set; }
+
+
             public string InStock { get; set; }
 
             [Required]
             [Column(TypeName = "varchar(16)")]
             public int Quantity { get; set; }
+
+            public int ShopId { get; set; }
+
+            public ShopBll Shop { get; set; }
 
         
     }

@@ -1,4 +1,4 @@
-using InStock.Data;
+using InStock._DAL.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
