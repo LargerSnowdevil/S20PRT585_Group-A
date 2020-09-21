@@ -39,6 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200921020545_test.cs" />
+    <Compile Remove="Migrations\20200921020545_test.Designer.cs" />
+    <Compile Remove="Migrations\20200921022034_modifedItem.cs" />
+    <Compile Remove="Migrations\20200921022034_modifedItem.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
