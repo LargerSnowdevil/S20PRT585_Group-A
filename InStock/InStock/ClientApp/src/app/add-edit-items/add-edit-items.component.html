@@ -51,6 +51,20 @@
             quantity is required
         </span>
     </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="quantity">Shop</label>
+        <div class="col-md-4">
+            <select class="form-control" type="number" formControlName="shopId" >
+                <option>Select</option>
+                <option  *ngFor="let shop of  (shops$ | async)" [ngValue]=shop.shopId>
+                    {{shop.name}}
+                </option>
+            </select>
+       </div>
+        <span class="text-danger" *ngIf="shopId.invalid && formDir.submitted">
+            Shop is required
+        </span>
+    </div>
 
 
     <div class="form-group">

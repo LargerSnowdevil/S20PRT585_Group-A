@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../services/items.service';  
 import { Items } from '../models/items';
+import { ShopsService } from '../services/shops.service';
+import { Shops } from '../models/shop';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-add-edit-items',
   templateUrl: './add-edit-items.component.html',
@@ -17,17 +20,19 @@ export class AddEditItemsComponent implements OnInit {
   fprice:number;
   finStock:string;
   fquantity:number;
+  fshopId:number;
   errorMessage: any;
   existingItem :Items;
-  
+  shops$: Observable<Shops[]>;
   private sub: any;
-  constructor(private _itemService: ItemsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
+  constructor(private _itemService: ItemsService,private shopService: ShopsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
     this.fname="name";
     this.fsku=0;
     this.fprice=0;
     this.finStock='false';
     this.fquantity=0;
+    this.fshopId=0;
    
     this.itemForm = this.formBuilder.group({  
       id: 0,  
@@ -35,15 +40,17 @@ export class AddEditItemsComponent implements OnInit {
       sku: ['', [Validators.required]],  
       price: ['', [Validators.required]],  
       inStock: ['', [Validators.required]],  
-      quantity: ['', [Validators.required]]  
+      quantity: ['', [Validators.required]],  
+      shopId: ['', [Validators.required]]  
   })   
     }
 
   ngOnInit() {
     this.sub = this.avRoute.params.subscribe(params => {
       this.id = +params['id']; 
+  
    });
-
+   this.shops$ = this.shopService.getShops();
     if (this.id > 0) {  
       this.title = "Edit";  
       this._itemService.getItemById(this.id)
@@ -54,6 +61,7 @@ export class AddEditItemsComponent implements OnInit {
         this.itemForm.controls['price'].setValue(data.price),
          this.itemForm.controls['inStock'].setValue(data.inStock),
         this.itemForm.controls['quantity'].setValue(data.quantity)
+        
       ));
 } 
   }  
@@ -70,8 +78,12 @@ export class AddEditItemsComponent implements OnInit {
         price: this.itemForm.get('price').value,
         inStock: this.itemForm.get('inStock').value,
         quantity: this.itemForm.get('quantity').value,
+        shop: {
+          shopId: this.itemForm.get('shopId').value
+        }
       };
       console.log(item)
+     // console.log(item)
       this._itemService.addItem(item)
       .subscribe((data) => {
         this._router.navigate(['/get-items']);
@@ -87,8 +99,11 @@ else if (this.title == "Edit") {
     price: this.itemForm.get('price').value,
     inStock: this.itemForm.get('inStock').value,
     quantity: this.itemForm.get('quantity').value,
+    shop:{
+      shopId: this.itemForm.get('shopId').value
+    }
   };
-  console.log(item)
+ // console.log(item)
   this._itemService.editItemById(item.id, item)
         .subscribe((data) => {
           this._router.navigate(['/get-items']);
@@ -106,4 +121,5 @@ cancel() {
     get price() { return this.itemForm.get('price'); }
     get inStock() { return this.itemForm.get('inStock'); }
     get quantity() { return this.itemForm.get('quantity'); }
+    get shopId() { return this.itemForm.get('shopId'); }
 }

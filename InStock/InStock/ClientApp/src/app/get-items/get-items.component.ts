@@ -25,7 +25,7 @@ export class GetItemsComponent implements OnInit {
   loadItems() {
     
     this.items$ = this.itemsService.getItems();
-    //this.shops$ = this.shopService.getShopById(this.items.id)
+   
   }
 
   delete(itemId) {

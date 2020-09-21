@@ -1,4 +1,4 @@
 export class Shops {
-    shopid? : number;
+    shopId? : number;
     name : string;
 }

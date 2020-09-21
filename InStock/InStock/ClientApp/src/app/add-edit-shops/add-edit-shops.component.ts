@@ -59,11 +59,11 @@ export class AddEditShopsComponent implements OnInit {
 
 else if (this.title == "Edit") {  
   let shop: Shops = {
-    shopid: this.existingShop.shopid,
+    shopId: this.existingShop.shopId,
     name: this.shopForm.get('name').value, 
   };
- // console.log(item)
-  this.shopService.editShopById(shop.shopid, shop)
+  console.log(shop)
+  this.shopService.editShopById(shop.shopId, shop)
         .subscribe((data) => {
           this._router.navigate(['/get-shops']);
         });

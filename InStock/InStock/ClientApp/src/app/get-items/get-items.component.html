@@ -2,7 +2,7 @@
 
 <p *ngIf="!(items$ | async)"><em>Loading....</em></p>
 <p>items
-  <a [routerLink]="['/add-item']" class="btn btn-primary float-right mb-3">Add Item</a>
+  <a [routerLink]="['/add-item/']" class="btn btn-primary float-right mb-3">Add Item</a>
 </p>
 
 <table class="table table-sm table-hover" *ngIf="(items$ | async)?.length>0">
