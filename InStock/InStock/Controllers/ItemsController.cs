@@ -16,12 +16,10 @@ namespace InStock.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemServiceBll _itemService;
-        private readonly IShopServiceBll _shopService;
 
-        public ItemsController(IItemServiceBll itemService, IShopServiceBll shopService)
+        public ItemsController(IItemServiceBll itemService)
         {
             _itemService = itemService;
-            _shopService = shopService;
         }
 
         // GET: api/Items
@@ -84,15 +82,6 @@ namespace InStock.Controllers
             await _itemService.DeleteItem(id);
 
             return item;
-        }
-
-        [HttpPost("{shopName}")]
-        public async Task<ActionResult<Shop>> AddShopSeed(String shopName)
-        {
-            var temp = new ShopBll() { Name =  shopName};
-            await _shopService.PostShop(temp);
-
-            return NoContent();
         }
     }
 }
