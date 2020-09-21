@@ -19,6 +19,7 @@ export class AddEditItemsComponent implements OnInit {
   fquantity:number;
   errorMessage: any;
   existingItem :Items;
+  
   private sub: any;
   constructor(private _itemService: ItemsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";

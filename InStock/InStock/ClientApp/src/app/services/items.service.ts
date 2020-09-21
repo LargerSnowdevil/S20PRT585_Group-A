@@ -35,6 +35,7 @@ export class ItemsService {
       catchError(this.errorHandler)
     );
 }
+  
 getItemBySearch(itemName: string): Observable<Items> {
   return this.http.get<Items>(this.myAppUrl + this.myApiUrl + "search/" + itemName)
   .pipe(
