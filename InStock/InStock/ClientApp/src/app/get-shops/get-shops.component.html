@@ -1,1 +1,23 @@
-<p>get-shops works!</p>
+<h1>Shops</h1>
+
+<p *ngIf="!(shops$ | async)"><em>Loading....</em></p>
+<p>
+  <a [routerLink]="['shop/add']" class="btn btn-primary float-right mb-3">Add Shop</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(shops$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let shop of (shops$ | async)">
+      <td><a [routerLink]="['/shop/', shop.shopId]">{{ shop.name }}</a></td> 
+       <td><a [routerLink]="['shop/edit/', shop.shopId]" class="btn btn-primary btn-sm float-right">Edit</a></td> 
+      <td><a [routerLink]="" (click)="delete(shop.shopId)" class="btn btn-danger btn-sm float-right">Delete</a></td>  
+    </tr>
+  </tbody>
+</table>

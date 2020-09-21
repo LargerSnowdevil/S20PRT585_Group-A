@@ -1,1 +1,8 @@
-<p>get-shop works!</p>
+<ng-container *ngIf="(shop$ | async) as shop; else loading">
+
+    <h1>{{ shop.name }}</h1>
+    
+    
+  
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>
