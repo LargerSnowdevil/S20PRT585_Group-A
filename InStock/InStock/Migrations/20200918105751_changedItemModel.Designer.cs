@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InStock.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    [Migration("20200912040552_Initial")]
-    partial class Initial
+    [Migration("20200918105751_changedItemModel")]
+    partial class changedItemModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,15 +20,15 @@ namespace InStock.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("InStock.Models.Item", b =>
+            modelBuilder.Entity("InStock._DAL.Models.Item", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("InStock")
-                        .HasColumnType("bit");
+                    b.Property<string>("InStock")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -44,9 +44,35 @@ namespace InStock.Migrations
                     b.Property<int>("SKU")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemId");
+
+                    b.HasIndex("ShopId");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("InStock._DAL.Models.Shop", b =>
+                {
+                    b.Property<int>("ShopId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("ShopId");
+
+                    b.ToTable("Shops");
+                });
+
+            modelBuilder.Entity("InStock._DAL.Models.Item", b =>
+                {
+                    b.HasOne("InStock._DAL.Models.Shop", "Shop")
+                        .WithMany("Items")
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
