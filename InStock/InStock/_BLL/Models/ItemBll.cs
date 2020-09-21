@@ -29,7 +29,7 @@ namespace InStock._BLL.Models
             [Column(TypeName = "varchar(16)")]
             public int Quantity { get; set; }
 
-            public int ShopId { get; set; }
+            public ShopBll Shop { get; set; }
 
         
     }
