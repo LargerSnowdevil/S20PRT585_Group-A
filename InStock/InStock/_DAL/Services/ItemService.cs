@@ -45,7 +45,6 @@ namespace InStock._DAL.Services
         public ItemBll GetItem(int id)
         {
             var efItem = _context.Items.Find(id);
-            var efShop = _context.Shops.Find(efItem.ShopId);
 
             var retItem = new ItemBll
             {
@@ -55,10 +54,7 @@ namespace InStock._DAL.Services
                 Price = efItem.Price,
                 InStock = efItem.InStock,
                 Quantity = efItem.Quantity,
-                Shop = new ShopBll
-                {
-                    ShopId = efShop.ShopId,
-                }
+                ShopId = efItem.ShopId
             };
 
             return retItem;
@@ -81,10 +77,7 @@ namespace InStock._DAL.Services
                     Price = item.Price,
                     InStock = item.InStock,
                     Quantity = item.Quantity,
-                    Shop = new ShopBll
-                    {
-                        ShopId = efShop.ShopId,
-                    }
+                    ShopId = item.ShopId
                 });
             }
 
@@ -94,7 +87,7 @@ namespace InStock._DAL.Services
         public async Task PostItem(ItemBll item)
         {
             //Todo ensure this method runs correctly im not great with async calls
-            var shop = _context.Shops.Find(item.Shop.ShopId);
+            var shop = _context.Shops.Find(item.ShopId);
             var efItem = new Item
             {
                 ItemId = item.Id,
@@ -103,6 +96,7 @@ namespace InStock._DAL.Services
                 Price = item.Price,
                 InStock = item.InStock,
                 Quantity = item.Quantity,
+                ShopId = item.ShopId,
                 Shop = shop
             };
 
@@ -114,7 +108,7 @@ namespace InStock._DAL.Services
         {
             //Todo ensure this method runs correctly im not great with async calls
             var efItem = _context.Items.Find(id);
-            var efShop = _context.Shops.Find(item.Shop.ShopId);
+            var efShop = _context.Shops.Find(item.ShopId);
 
             if (efItem != null)
             {
@@ -123,6 +117,7 @@ namespace InStock._DAL.Services
                 efItem.Price = item.Price;
                 efItem.InStock = item.InStock;
                 efItem.Quantity = item.Quantity;
+                efItem.ShopId = item.ShopId;
                 efItem.Shop = efShop;
 
                 _context.Items.Update(efItem);
