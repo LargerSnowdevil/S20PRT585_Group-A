@@ -38,16 +38,13 @@ import { FilterPipe } from './filter.pipe';
     RouterModule.forRoot([
      { path: '', component: HomeComponent, pathMatch: 'full' },
      { path: 'get-items', component: GetItemsComponent },
-     { path: 'item/edit/:id', component: AddEditItemsComponent },
-     { path: 'item/add', component: AddEditItemsComponent },
-     { path: 'item/:id', component: GetItemComponent },
-     { path: 'get-shops', component: GetShopsComponent },
-     { path: 'shop/edit/:id', component: AddEditShopsComponent },
-     { path: 'shop/add', component: AddEditShopsComponent },
-     { path: 'shop/:id', component: GetShopComponent },
-
-      
-      
+      { path: 'edit-item/:id', component: AddEditItemsComponent },
+      { path: 'add-item', component: AddEditItemsComponent },
+      { path: 'item/:id', component: GetItemComponent },
+      { path: 'get-shops', component: GetShopsComponent },
+      { path: 'edit-shop/:id', component: AddEditShopsComponent },
+      { path: 'add-shop', component: AddEditShopsComponent },
+      { path: 'shop/:id', component: GetShopComponent },
     ])
   ],
   providers: [

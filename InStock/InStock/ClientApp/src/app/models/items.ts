@@ -5,5 +5,8 @@ export class Items {
     price: number;
     inStock: boolean;
     quantity: number;
-    shopId:number;
+    shop:{
+      shopId?:number;
+      name:string;
+    }
   }

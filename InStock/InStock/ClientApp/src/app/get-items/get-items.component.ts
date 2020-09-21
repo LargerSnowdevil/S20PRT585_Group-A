@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ItemsService } from '../services/items.service';
 import { Items } from '../models/items';
+import { ShopsService } from '../services/shops.service';
+import { Shops } from '../models/shop';
+
 @Component({
   selector: 'app-get-items',
   templateUrl: './get-items.component.html',
@@ -10,8 +13,8 @@ import { Items } from '../models/items';
 })
 export class GetItemsComponent implements OnInit {
   items$: Observable<Items[]>;
-
-  constructor(private itemsService: ItemsService) {
+  shops$: Observable<Shops[]>;
+  constructor(private itemsService: ItemsService, private shopService: ShopsService) {
   }
 
 
@@ -20,8 +23,11 @@ export class GetItemsComponent implements OnInit {
   }
 
   loadItems() {
+    
     this.items$ = this.itemsService.getItems();
+    //this.shops$ = this.shopService.getShopById(this.items.id)
   }
+
   delete(itemId) {
     const ans = confirm('Do you want to delete blog post with id: ' + itemId);
     if (ans) {
