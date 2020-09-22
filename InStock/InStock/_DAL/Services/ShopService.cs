@@ -45,7 +45,14 @@ namespace InStock._DAL.Services
         {
             var efShop = _context.Shops.Find(id);
 
-            var retShop = new ShopBll { ShopId = efShop.ShopId, Name = efShop.Name };
+            var retShop = new ShopBll { 
+                ShopId = efShop.ShopId,
+                Name = efShop.Name,
+                ContactNumber = efShop.ContactNumber,
+                Address = efShop.Address,
+                Lat = efShop.Lat,
+                Long = efShop.Long
+            };
 
             return retShop;
         }
@@ -57,7 +64,14 @@ namespace InStock._DAL.Services
 
             foreach (var item in efShops)
             {
-                retShops.Add(new ShopBll { ShopId = item.ShopId, Name = item.Name });
+                retShops.Add(new ShopBll {
+                    ShopId = item.ShopId,
+                    Name = item.Name,
+                    ContactNumber = item.ContactNumber,
+                    Address = item.Address,
+                    Lat = item.Lat,
+                    Long = item.Long
+                });
             }
 
             return retShops;
@@ -70,6 +84,10 @@ namespace InStock._DAL.Services
             {
                 ShopId = shop.ShopId,
                 Name = shop.Name,
+                ContactNumber = shop.ContactNumber,
+                Address = shop.Address,
+                Lat = shop.Lat,
+                Long = shop.Long,
                 Items = new List<Item>()
             };
 
@@ -85,6 +103,10 @@ namespace InStock._DAL.Services
             if (efShop != null)
             {
                 efShop.Name = shop.Name;
+                efShop.ContactNumber = shop.ContactNumber;
+                efShop.Address = shop.Address;
+                efShop.Lat = shop.Lat;
+                efShop.Long = shop.Long;
             }
 
             _context.Shops.Update(efShop);
