@@ -4,14 +4,16 @@ using InStock._DAL.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InStock.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    partial class ItemContextModelSnapshot : ModelSnapshot
+    [Migration("20200922072734_completeRebuild")]
+    partial class completeRebuild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace InStock.Migrations
                     b.Property<int>("Available")
                         .HasColumnType("int");
 
-                    b.Property<int>("ItemId")
+                    b.Property<int?>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -60,7 +62,8 @@ namespace InStock.Migrations
                     b.HasKey("SKU");
 
                     b.HasIndex("ItemId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ItemId] IS NOT NULL");
 
                     b.ToTable("Inventories");
                 });
@@ -73,6 +76,7 @@ namespace InStock.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("varchar(16)");
 
                     b.HasKey("ItemId");
@@ -122,9 +126,7 @@ namespace InStock.Migrations
                 {
                     b.HasOne("InStock._DAL.Models.Item", "Item")
                         .WithOne("Inventory")
-                        .HasForeignKey("InStock._DAL.Models.Inventory", "ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InStock._DAL.Models.Inventory", "ItemId");
                 });
 #pragma warning restore 612, 618
         }

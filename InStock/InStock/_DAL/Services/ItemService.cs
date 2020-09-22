@@ -50,19 +50,6 @@ namespace InStock._DAL.Services
             {
                 Id = efItem.ItemId,
                 Name = efItem.Name,
-                SKU = efItem.SKU,
-                Price = efItem.Price,
-                InStock = efItem.InStock,
-                Quantity = efItem.Quantity,
-                Shop = new ShopBll
-                {
-                    Address = efShop.Address,
-                    Name = efShop.Name,
-                    ContactNumber = efShop.ContactNumber,
-                    ShopId = efShop.ShopId,
-                    Lat = efShop.Lat,
-                    Long = efShop.Long
-                }
             };
 
             return retItem;
@@ -75,25 +62,10 @@ namespace InStock._DAL.Services
 
             foreach (var item in efItems)
             {
-                var efShop = _context.Shops.Find(item.ShopId);
-
                 retItems.Add(new ItemBll
                 {
                     Id = item.ItemId,
                     Name = item.Name,
-                    SKU = item.SKU,
-                    Price = item.Price,
-                    InStock = item.InStock,
-                    Quantity = item.Quantity,
-                    Shop = new ShopBll
-                    {
-                        Address = efShop.Address,
-                        Name = efShop.Name,
-                        ContactNumber = efShop.ContactNumber,
-                        ShopId = efShop.ShopId,
-                        Lat = efShop.Lat,
-                        Long = efShop.Long
-                    }
                 });
             }
 
@@ -103,16 +75,10 @@ namespace InStock._DAL.Services
         public async Task PostItem(ItemBll item)
         {
             //Todo ensure this method runs correctly im not great with async calls
-            var shop = _context.Shops.Find(item.Shop.ShopId);
             var efItem = new Item
             {
                 ItemId = item.Id,
                 Name = item.Name,
-                SKU = item.SKU,
-                Price = item.Price,
-                InStock = item.InStock,
-                Quantity = item.Quantity,
-                Shop = shop
             };
 
             _context.Items.Add(efItem);
@@ -123,16 +89,10 @@ namespace InStock._DAL.Services
         {
             //Todo ensure this method runs correctly im not great with async calls
             var efItem = _context.Items.Find(id);
-            var efShop = _context.Shops.Find(item.Shop.ShopId);
 
             if (efItem != null)
             {
                 efItem.Name = item.Name;
-                efItem.SKU = item.SKU;
-                efItem.Price = item.Price;
-                efItem.InStock = item.InStock;
-                efItem.Quantity = item.Quantity;
-                efItem.Shop = efShop;
 
                 _context.Items.Update(efItem);
                 await _context.SaveChangesAsync();

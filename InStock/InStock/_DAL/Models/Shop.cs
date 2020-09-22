@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +20,10 @@ namespace InStock._DAL.Models
         public double Lat { get; set; }
         public double Long { get; set; }
 
-        public List<Item> Items { get; set; }
+       //public ICollection<Item> Items { get; set; }
+
+        public List<DimShopItem> Dim { get; set; }
+
+        //public List<Item> Item { get; set; }
     }
 }
