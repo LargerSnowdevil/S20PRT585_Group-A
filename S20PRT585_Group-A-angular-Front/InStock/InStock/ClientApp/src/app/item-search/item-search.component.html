@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="searchText()"  #formDir="ngForm" novalidate >
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="search">Search For an Item</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" formControlName="search">
+        </div>
+        <span class="text-danger" *ngIf="searchText.invalid && formDir.submitted">
+            Text is required
+        </span>
+    </div>
+    <button type="submit" class="btn btn-success ">Search</button>
+  </form>
+
+
+<table class="table table-sm table-hover" *ngIf="(items$ | async)?.length>0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Price</th>
+        <th>Available</th>
+        <th>Quantity</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of (items$ | async)">
+        <td><a [routerLink]="['/item/', item.id]">{{ item.name }}</a></td> 
+        <td>{{ item.sku }}</td>
+        <td>{{"$" + item.price }}</td>
+        <td>{{ item.inStock }}</td>
+        <td>{{ item.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>

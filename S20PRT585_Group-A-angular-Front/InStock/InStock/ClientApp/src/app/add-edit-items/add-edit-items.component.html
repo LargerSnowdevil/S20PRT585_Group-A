@@ -1,0 +1,75 @@
+<h1>{{title}}</h1>
+<h3>Item</h3>
+<div class="container">
+<form [formGroup]="itemForm" (ngSubmit)="save()"  #formDir="ngForm" novalidate >
+    <div class="form-group row">
+        <label class=" control-label col-md-12 ">Name</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" formControlName="name" >
+        </div>
+        <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
+            Name is required.
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="sku">SKU</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" formControlName="sku" >
+        </div>
+        <span class="text-danger" *ngIf="sku.invalid && formDir.submitted">
+            SKU is required
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="price">Price</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" formControlName="price">
+        </div>
+        <span class="text-danger" *ngIf="price.invalid && formDir.submitted">
+            price is required
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="inStock">Availability</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="inStock">
+                <option value="">--Select Availablity--</option>
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="inStock.invalid && formDir.submitted">
+            Availability is required
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="quantity">Quantity</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" formControlName="quantity">
+        </div>
+        <span class="text-danger" *ngIf="quantity.invalid && formDir.submitted">
+            quantity is required
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="quantity">Shop</label>
+        <div class="col-md-4">
+            <select class="form-control" type="number" formControlName="shopId" >
+                <option>Select</option>
+                <option  *ngFor="let shop of  (shops$ | async)" [ngValue]=shop.shopId>
+                    {{shop.name}}
+                </option>
+            </select>
+       </div>
+        <span class="text-danger" *ngIf="shopId.invalid && formDir.submitted">
+            Shop is required
+        </span>
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success ">Save</button>
+        <button class="btn btn-secondary float-left"(click)="cancel()">Cancel</button>
+    </div>
+</form>
+</div>
