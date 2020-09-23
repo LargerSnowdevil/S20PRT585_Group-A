@@ -15,19 +15,6 @@ namespace InStock._BLL.Models
 
             [Column(TypeName = "varchar(16)")]
             public string Name { get; set; }
-
-           // [Required]
-           // public int SKU { get; set; }
-           // [Required]
-            //public int Price { get; set; }
-
-
-          //  public string InStock { get; set; }
-
-            //[Required]
-            //[Column(TypeName = "varchar(16)")]
-           // public int Quantity { get; set; }
-
-        
+ 
     }
 }

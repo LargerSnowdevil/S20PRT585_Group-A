@@ -11,11 +11,15 @@ namespace InStock._DAL.Models
     {
         [Key]
         public int SKU { get;   set; }
+        [Required]
         public int Available { get; set; }
+        [Required]
         public int Quantity { get;   set; }
-
-        [ForeignKey("Item")]
         public int ItemId { get; set; }
         public Item Item { get; set; }
+        public int ShopId { get; set; }
+
+        public Shop Shop { get; set; }
+
     }
 }

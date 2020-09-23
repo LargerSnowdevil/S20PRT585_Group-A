@@ -10,7 +10,7 @@ namespace InStock._BLL.Models
         public int SKU { get; set; }
         public int Available { get; set; }
         public int Quantity { get; set; }
-
-        public ItemBll Item { get; set; }
+        public int ShopId { get; set; }
+        public int ItemId { get; set; }
     }
 }

@@ -9,33 +9,17 @@ namespace InStock._DAL.Models
 {
     public class Item
     {
-       
             [Key]
             public int ItemId { get; set; }
 
             [Column(TypeName = "varchar(16)")]
             public string Name { get; set; }
 
-           // [Required]
-            //public int SKU { get; set; }
-            //[Required]
-            //public int Price { get; set; }
+            public List<Inventory> Inventory { get; set; }
+ 
+
+          
 
 
-           // public string InStock { get; set; }
-
-           // [Required]
-           // [Column(TypeName = "varchar(16)")]
-            //public int Quantity { get; set; }
-
-            //public int ShopId { get; set; }
-
-            //public ICollection<Shop> Shops { get; set; }
-
-        public List<DimShopItem> Dim { get; set; }
-
-        //public List<Shop> Shop { get; set; }
-
-        public Inventory Inventory { get; set; }
     }
 }

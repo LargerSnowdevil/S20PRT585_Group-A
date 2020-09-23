@@ -9,21 +9,19 @@ namespace InStock._DAL.Models
 {
     public class Shop
     {
+        [Key]
         public int ShopId { get; set; }
-
-        public String Name { get; set; }
-
-        public String ContactNumber { get; set; }
-
-        public String Address { get; set; }
-
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string ContactNumber { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
         public double Lat { get; set; }
+        [Required]
         public double Long { get; set; }
 
-       //public ICollection<Item> Items { get; set; }
-
-        public List<DimShopItem> Dim { get; set; }
-
-        //public List<Item> Item { get; set; }
+        public List<Inventory> Inventory { get; set; }
     }
 }

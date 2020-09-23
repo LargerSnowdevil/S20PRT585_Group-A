@@ -42,17 +42,24 @@ namespace InStock._DAL.Services
         public InventoryBll GetInventoryItem(int id)
         {
             var efItem = _context.Inventories.Find(id);
+            var retitems = new List<ItemBll>();
+
+            //foreach (var item in efItem.Items)
+            //{
+            //    retitems.Add(new ItemBll
+            //    {
+            //        Id = item.ItemId,
+            //        Name = item.Name
+            //    });
+            //}
 
             var retItem = new InventoryBll
             {
                 SKU = efItem.SKU,
                 Available = efItem.Available,
                 Quantity = efItem.Quantity,
-                Item = new ItemBll
-                {
-                    Id = efItem.Item.ItemId,
-                    Name = efItem.Item.Name
-                }
+                ShopId = efItem.ShopId,
+                ItemId = efItem.ItemId
             };
 
             return retItem;
@@ -65,16 +72,30 @@ namespace InStock._DAL.Services
 
             foreach (var item in efItems)
             {
+                //var bllItems = new List<ItemBll>();
+
+                //if (item.Items != null)
+                //{
+                //    foreach (var itemItem in item.Items)
+                //    {
+                //        bllItems.Add(new ItemBll
+                //        {
+                //            Id = itemItem.ItemId,
+                //            Name = itemItem.Name
+                //        });
+                    
+                //    }
+                //}
+                
+
                 retItems.Add(new InventoryBll
                 {
                     SKU = item.SKU,
                     Available = item.Available,
                     Quantity = item.Quantity,
-                    Item = new ItemBll
-                    {
-                        Id = item.Item.ItemId,
-                        Name = item.Item.Name
-                    }
+                    ShopId = item.ShopId,
+                    ItemId = item.ItemId
+
                 });
             }
 
@@ -89,10 +110,9 @@ namespace InStock._DAL.Services
                 SKU = item.SKU,
                 Available = item.Available,
                 Quantity = item.Quantity,
-                Item = new Item
-                {
-                    ItemId = item.Item.Id
-                }
+                ShopId = item.ShopId,
+                ItemId = item.ItemId,
+
             };
 
             _context.Inventories.Add(efItem);
@@ -102,14 +122,16 @@ namespace InStock._DAL.Services
         public async Task PutInventoryItem(int id, InventoryBll item)
         {
             var efItem = _context.Inventories.Find(id);
-            var ef = _context.Items.Find(item.Item.Id);
+          // var ef = _context.Items.Find(item.Item.Id);
 
             if (efItem != null)
             {
-                efItem.SKU = item.SKU;
                 efItem.Available = item.Available;
                 efItem.Quantity = item.Quantity;
-                efItem.Item = ef;
+                efItem.ShopId = item.ShopId;
+                efItem.ItemId = item.ItemId;
+
+                // efItem.Item = ef;
 
                 _context.Inventories.Update(efItem);
                 await _context.SaveChangesAsync();
