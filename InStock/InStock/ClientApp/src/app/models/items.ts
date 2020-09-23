@@ -4,5 +4,9 @@ export class Items {
     sku: number;
     price: number;
     inStock: boolean;
-    quantity: number
+    quantity: number;
+    shop:{
+      shopId:number;
+      name?:string;
+    }
   }
