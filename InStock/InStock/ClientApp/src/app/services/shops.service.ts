@@ -28,6 +28,13 @@ getShops(): Observable<Shops[]> {
     catchError(this.errorHandler)
   );
 }
+getShopById(shopId: number): Observable<Shops> {
+  return this.http.get<Shops>(this.myAppUrl + this.myApiUrl + shopId)
+  .pipe(
+    retry(1),
+    catchError(this.errorHandler)
+  );
+}
 
 addShop(shop): Observable<Shops> {
 return this.http.post<Shops>(this.myAppUrl + this.myApiUrl, JSON.stringify(shop), this.httpOptions)

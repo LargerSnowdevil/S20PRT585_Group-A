@@ -20,6 +20,7 @@ export class ItemsService {
   constructor(private http: HttpClient) {
       this.myAppUrl = environment.appUrl;
       this.myApiUrl = 'api/Items/';
+      
   }
   getItems(): Observable<Items[]> {
     return this.http.get<Items[]>(this.myAppUrl + this.myApiUrl)

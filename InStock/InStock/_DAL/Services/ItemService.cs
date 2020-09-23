@@ -45,6 +45,7 @@ namespace InStock._DAL.Services
         public ItemBll GetItem(int id)
         {
             var efItem = _context.Items.Find(id);
+            var efShop = _context.Shops.Find(efItem.ShopId);
 
             var retItem = new ItemBll
             {
@@ -56,12 +57,8 @@ namespace InStock._DAL.Services
                 Quantity = efItem.Quantity,
                 Shop = new ShopBll
                 {
-                    Address = efShop.Address,
                     Name = efShop.Name,
-                    ContactNumber = efShop.ContactNumber,
-                    ShopId = efShop.ShopId,
-                    Lat = efShop.Lat,
-                    Long = efShop.Long
+                    ShopId = efShop.ShopId
                 }
             };
 
@@ -87,12 +84,8 @@ namespace InStock._DAL.Services
                     Quantity = item.Quantity,
                     Shop = new ShopBll
                     {
-                        Address = efShop.Address,
                         Name = efShop.Name,
-                        ContactNumber = efShop.ContactNumber,
-                        ShopId = efShop.ShopId,
-                        Lat = efShop.Lat,
-                        Long = efShop.Long
+                        ShopId = efShop.ShopId
                     }
                 });
             }
@@ -132,6 +125,7 @@ namespace InStock._DAL.Services
                 efItem.Price = item.Price;
                 efItem.InStock = item.InStock;
                 efItem.Quantity = item.Quantity;
+                efItem.ShopId = item.Shop.ShopId;
                 efItem.Shop = efShop;
 
                 _context.Items.Update(efItem);
