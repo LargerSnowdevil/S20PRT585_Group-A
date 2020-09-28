@@ -1,0 +1,35 @@
+<h1>Inventory</h1>
+
+<p *ngIf="!(inventories$ | async)"><em>Loading....</em></p>
+<p>
+  <a [routerLink]="['/add-inventory/']" class="btn btn-primary float-right mb-3">Add Inventory</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(inventories$ | async)?.length>0">
+  <thead>
+    <tr>
+      
+      <th>Item Name</th>
+      <th>In Stock</th>
+      <th>Quantity</th>
+      <th>Available At</th>
+      <th></th>
+      <th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inventory of (inventories$ | async)">
+       <td>{{inventory.items.name}}</td>  
+       
+      <td><span *ngIf="inventory.available" class="badge badge-info">True</span>
+        <span *ngIf="!inventory.available" class="badge badge-danger">False</span>
+    </td>
+      
+      <td>{{inventory.quantity}}</td>
+     <td>{{inventory.shops.name}}</td> 
+       <td><a [routerLink]="['/edit-inventory/', inventory.sku]" class="btn btn-primary btn-sm float-right">Edit</a></td> 
+      <td><a [routerLink]="" (click)="delete(inventory.sku)" class="btn btn-danger btn-sm float-right">Delete</a></td>  
+    </tr>
+  </tbody>
+</table>

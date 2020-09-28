@@ -47,10 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200921020545_test.cs" />
-    <Compile Remove="Migrations\20200921020545_test.Designer.cs" />
-    <Compile Remove="Migrations\20200921022034_modifedItem.cs" />
-    <Compile Remove="Migrations\20200921022034_modifedItem.Designer.cs" />
+    <Compile Remove="Migrations\20200923092102_latest.cs" />
+    <Compile Remove="Migrations\20200923092102_latest.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
@@ -80,7 +78,5 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
-
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
