@@ -87,8 +87,7 @@ namespace InStock._DAL.Services
                 ContactNumber = shop.ContactNumber,
                 Address = shop.Address,
                 Lat = shop.Lat,
-                Long = shop.Long,
-                Items = new List<Item>()
+                Long = shop.Long
             };
 
             _context.Shops.Add(efShop);

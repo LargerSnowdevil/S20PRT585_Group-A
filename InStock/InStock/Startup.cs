@@ -39,6 +39,9 @@ namespace InStock
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IShopServiceBll, ShopServiceBll>();
 
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<IInventoryServiceBll, InventoryServiceBll>();
+
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
             });

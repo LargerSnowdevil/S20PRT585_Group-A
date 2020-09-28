@@ -10,11 +10,15 @@ import { GetItemsComponent } from './get-items/get-items.component';
 import { AddEditItemsComponent } from './add-edit-items/add-edit-items.component';
 import { ItemsService} from './services/items.service';
 import { ShopsService} from './services/shops.service';
+import { InventoryService} from './services/inventory.service';
 import { GetShopsComponent} from './get-shops/get-shops.component';
 import { GetShopComponent} from './get-shop/get-shop.component';
 import { AddEditShopsComponent} from './add-edit-shops/add-edit-shops.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { GetItemComponent} from './get-item/get-item.component';
+import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
+import { GetInventoryComponent} from './get-inventory/get-inventory.component';
+import { AddEditInventoryComponent} from './add-edit-inventory/add-edit-inventory.component';
 import { FilterPipe } from './filter.pipe'; 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { FilterPipe } from './filter.pipe';
     ItemSearchComponent,
     GetShopsComponent,
     GetShopComponent,
-    AddEditShopsComponent
+    AddEditShopsComponent,
+    GetInventoriesComponent,
+    GetInventoryComponent,
+    AddEditInventoryComponent
+
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -46,12 +54,17 @@ import { FilterPipe } from './filter.pipe';
      { path: 'add-shop', component: AddEditShopsComponent },
      { path: 'shop/:id', component: GetShopComponent },
      { path: 'item-search', component: ItemSearchComponent },
+     {path: 'get-inventories', component : GetInventoriesComponent},
+     {path: 'get-inventory', component : GetInventoryComponent},
+     {path: 'edit-inventory/:id', component : AddEditInventoryComponent},
+     {path: 'add-inventory', component : AddEditInventoryComponent}
 
     ])
   ],
   providers: [
     ItemsService,
-    ShopsService
+    ShopsService,
+    InventoryService
   ],
   bootstrap: [AppComponent]
 })

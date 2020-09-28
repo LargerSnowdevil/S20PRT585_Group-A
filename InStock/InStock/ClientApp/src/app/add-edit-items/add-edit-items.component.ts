@@ -16,11 +16,6 @@ export class AddEditItemsComponent implements OnInit {
   title: string;
   id: number;
   fname:string;
-  fsku:number;
-  fprice:number;
-  finStock:string;
-  fquantity:number;
-  fshopId:number;
   errorMessage: any;
   existingItem :Items;
   shops$: Observable<Shops[]>;
@@ -28,20 +23,12 @@ export class AddEditItemsComponent implements OnInit {
   constructor(private _itemService: ItemsService,private shopService: ShopsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
     this.fname="name";
-    this.fsku=0;
-    this.fprice=0;
-    this.finStock='false';
-    this.fquantity=0;
-    this.fshopId=0;
+   
    
     this.itemForm = this.formBuilder.group({  
       id: 0,  
       name: ['', [Validators.required]],  
-      sku: ['', [Validators.required]],  
-      price: ['', [Validators.required]],  
-      inStock: ['', [Validators.required]],  
-      quantity: ['', [Validators.required]],  
-      shopId: ['', [Validators.required]]  
+    
   })   
     }
 
@@ -56,12 +43,7 @@ export class AddEditItemsComponent implements OnInit {
       this._itemService.getItemById(this.id)
       .subscribe(data => (
         this.existingItem = data,
-        this.itemForm.controls['name'].setValue(data.name),
-        this.itemForm.controls['sku'].setValue(data.sku),
-        this.itemForm.controls['price'].setValue(data.price),
-         this.itemForm.controls['inStock'].setValue(data.inStock),
-        this.itemForm.controls['quantity'].setValue(data.quantity)
-        
+        this.itemForm.controls['name'].setValue(data.name)
       ));
 } 
   }  
@@ -74,13 +56,7 @@ export class AddEditItemsComponent implements OnInit {
     if (this.title == "Add") {
       let item: Items = {
         name: this.itemForm.get('name').value,
-        sku: this.itemForm.get('sku').value,
-        price: this.itemForm.get('price').value,
-        inStock: this.itemForm.get('inStock').value,
-        quantity: this.itemForm.get('quantity').value,
-        shop: {
-          shopId: this.itemForm.get('shopId').value
-        }
+       
       };
       console.log(item)
      // console.log(item)
@@ -94,14 +70,8 @@ export class AddEditItemsComponent implements OnInit {
 else if (this.title == "Edit") {  
   let item: Items = {
     id: this.existingItem.id,
-    name: this.itemForm.get('name').value,
-    sku: this.itemForm.get('sku').value,
-    price: this.itemForm.get('price').value,
-    inStock: this.itemForm.get('inStock').value,
-    quantity: this.itemForm.get('quantity').value,
-    shop:{
-      shopId: this.itemForm.get('shopId').value
-    }
+    name: this.itemForm.get('name').value
+    
   };
  // console.log(item)
   this._itemService.editItemById(item.id, item)
@@ -117,9 +87,5 @@ cancel() {
     }  
   
     get name() { return this.itemForm.get('name'); }
-    get sku() { return this.itemForm.get('sku'); }
-    get price() { return this.itemForm.get('price'); }
-    get inStock() { return this.itemForm.get('inStock'); }
-    get quantity() { return this.itemForm.get('quantity'); }
-    get shopId() { return this.itemForm.get('shopId'); }
+   
 }
