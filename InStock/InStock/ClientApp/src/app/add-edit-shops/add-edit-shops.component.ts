@@ -22,7 +22,7 @@ export class AddEditShopsComponent implements OnInit {
   flong:number;
   errorMessage: any;
   existingShop :Shops;
-  items$: Observable<Items[]>;
+
   private sub: any;
   constructor(private shopService: ShopsService, private _itemService: ItemsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
@@ -47,7 +47,7 @@ export class AddEditShopsComponent implements OnInit {
     this.sub = this.avRoute.params.subscribe(params => {
       this.fshopId = +params['id']; 
    })
-   this.items$ = this._itemService.getItems();
+  
    if (this.fshopId > 0) {  
     this.title = "Edit";  
     this.shopService.getShopById(this.fshopId)

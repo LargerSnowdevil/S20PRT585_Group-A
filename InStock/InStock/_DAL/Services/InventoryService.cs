@@ -42,16 +42,9 @@ namespace InStock._DAL.Services
         public InventoryBll GetInventoryItem(int id)
         {
             var efItem = _context.Inventories.Find(id);
-            var retitems = new List<ItemBll>();
-
-            //foreach (var item in efItem.Items)
-            //{
-            //    retitems.Add(new ItemBll
-            //    {
-            //        Id = item.ItemId,
-            //        Name = item.Name
-            //    });
-            //}
+           // var retitems = new List<ItemBll>();
+            var itm = _context.Items.Find(efItem.ItemId);
+            var shp = _context.Shops.Find(efItem.ShopId);
 
             var retItem = new InventoryBll
             {
@@ -59,7 +52,17 @@ namespace InStock._DAL.Services
                 Available = efItem.Available,
                 Quantity = efItem.Quantity,
                 ShopId = efItem.ShopId,
-                ItemId = efItem.ItemId
+                ItemId = efItem.ItemId,
+                Items = new ItemBll
+                {
+                    Id = itm.ItemId,
+                    Name = itm.Name
+                },
+                Shops = new ShopBll
+                {
+                    ShopId = shp.ShopId,
+                    Name = shp.Name
+                }
             };
 
             return retItem;
@@ -72,21 +75,8 @@ namespace InStock._DAL.Services
 
             foreach (var item in efItems)
             {
-                //var bllItems = new List<ItemBll>();
-
-                //if (item.Items != null)
-                //{
-                //    foreach (var itemItem in item.Items)
-                //    {
-                //        bllItems.Add(new ItemBll
-                //        {
-                //            Id = itemItem.ItemId,
-                //            Name = itemItem.Name
-                //        });
-                    
-                //    }
-                //}
-                
+                var itm = _context.Items.Find(item.ItemId);
+                var shp = _context.Shops.Find(item.ShopId);
 
                 retItems.Add(new InventoryBll
                 {
@@ -94,7 +84,17 @@ namespace InStock._DAL.Services
                     Available = item.Available,
                     Quantity = item.Quantity,
                     ShopId = item.ShopId,
-                    ItemId = item.ItemId
+                    ItemId = item.ItemId,
+                    Items = new ItemBll
+                    {
+                        Id = itm.ItemId,
+                        Name = itm.Name
+                    },
+                    Shops = new ShopBll
+                    {
+                        ShopId = shp.ShopId,
+                        Name = shp.Name
+                    }
 
                 });
             }

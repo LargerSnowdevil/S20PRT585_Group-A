@@ -1,7 +1,7 @@
 <h1>Items</h1>
 
 <p *ngIf="!(items$ | async)"><em>Loading....</em></p>
-<p>items
+<p>
   <a [routerLink]="['/add-item/']" class="btn btn-primary float-right mb-3">Add Item</a>
 </p>
 
@@ -9,11 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>SKU</th>
-      <th>Price</th>
-      <th>Available</th>
-      <th>Quantity</th>
-      <th>Shop</th>
+   
       <th></th>
       <th></th>
       
@@ -22,11 +18,6 @@
   <tbody>
     <tr *ngFor="let item of (items$ | async)">
       <td><a [routerLink]="['/item/', item.id]">{{ item.name }}</a></td> 
-      <td>{{ item.sku }}</td>
-      <td>{{"$" + item.price }}</td>
-      <td>{{ item.inStock }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.shop.name }}</td>
        <td><a [routerLink]="['/edit-item/', item.id]" class="btn btn-primary btn-sm float-right">Edit</a></td> 
       <td><a [routerLink]="" (click)="delete(item.id)" class="btn btn-danger btn-sm float-right">Delete</a></td>  
     </tr>

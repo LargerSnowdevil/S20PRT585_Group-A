@@ -10,16 +10,16 @@ namespace InStock.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InvertoriesController : ControllerBase
+    public class InventoriesController : ControllerBase
     {
         private readonly IInventoryServiceBll _itemService;
 
-        public InvertoriesController(IInventoryServiceBll itemService)
+        public InventoriesController(IInventoryServiceBll itemService)
         {
             _itemService = itemService;
         }
 
-        // GET: api/Items
+        // GET: api/I 
         [HttpGet]
         public ActionResult<IEnumerable<InventoryBll>> GetItems()
         {
