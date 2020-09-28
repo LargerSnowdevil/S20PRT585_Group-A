@@ -122,7 +122,7 @@ namespace InStock._DAL.Services
         public async Task PutInventoryItem(int id, InventoryBll item)
         {
             var efItem = _context.Inventories.Find(id);
-          // var ef = _context.Items.Find(item.Item.Id);
+         // var ef = _context.Items.Find(item.Item.Id);
 
             if (efItem != null)
             {
