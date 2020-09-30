@@ -9,8 +9,6 @@ namespace InStock._BLL.Models
 {
     public class ItemBll
     {
-       
-            [Key]
             public int Id { get; set; }
 
             [Column(TypeName = "varchar(16)")]

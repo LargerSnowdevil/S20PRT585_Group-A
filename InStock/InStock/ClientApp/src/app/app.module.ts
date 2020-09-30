@@ -10,6 +10,7 @@ import { GetItemsComponent } from './get-items/get-items.component';
 import { AddEditItemsComponent } from './add-edit-items/add-edit-items.component';
 import { ItemsService} from './services/items.service';
 import { ShopsService} from './services/shops.service';
+import { SendMailService} from './services/send-mail.service';
 import { InventoryService} from './services/inventory.service';
 import { GetShopsComponent} from './get-shops/get-shops.component';
 import { GetShopComponent} from './get-shop/get-shop.component';
@@ -19,7 +20,8 @@ import { GetItemComponent} from './get-item/get-item.component';
 import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
 import { GetInventoryComponent} from './get-inventory/get-inventory.component';
 import { AddEditInventoryComponent} from './add-edit-inventory/add-edit-inventory.component';
-import { FilterPipe } from './filter.pipe'; 
+import { MailComponent} from'./mail/mail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,7 @@ import { FilterPipe } from './filter.pipe';
     GetItemsComponent,
     AddEditItemsComponent,
     GetItemComponent,
-    FilterPipe,
+    MailComponent,
     ItemSearchComponent,
     GetShopsComponent,
     GetShopComponent,
@@ -54,17 +56,19 @@ import { FilterPipe } from './filter.pipe';
      { path: 'add-shop', component: AddEditShopsComponent },
      { path: 'shop/:id', component: GetShopComponent },
      { path: 'item-search', component: ItemSearchComponent },
-     {path: 'get-inventories', component : GetInventoriesComponent},
-     {path: 'get-inventory', component : GetInventoryComponent},
-     {path: 'edit-inventory/:id', component : AddEditInventoryComponent},
-     {path: 'add-inventory', component : AddEditInventoryComponent}
+     { path: 'get-inventories', component : GetInventoriesComponent},
+     { path: 'get-inventory', component : GetInventoryComponent},
+     { path: 'edit-inventory/:id', component : AddEditInventoryComponent},
+     { path: 'add-inventory', component : AddEditInventoryComponent},
+    { path: 'mail', component : MailComponent}
 
     ])
   ],
   providers: [
     ItemsService,
     ShopsService,
-    InventoryService
+    InventoryService,
+    SendMailService
   ],
   bootstrap: [AppComponent]
 })

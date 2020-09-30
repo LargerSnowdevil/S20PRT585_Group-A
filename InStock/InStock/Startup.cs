@@ -1,4 +1,5 @@
 using InStock._BLL.Services;
+using InStock._DAL.Models;
 using InStock._DAL.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +30,11 @@ namespace InStock
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddDbContext<ItemContext>(optionns =>
             optionns.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IMailServiceBll, MailServiceBll>();
 
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemServiceBll, ItemServiceBll>();
