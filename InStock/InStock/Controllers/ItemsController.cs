@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InStock._BLL.Services;
 using InStock._BLL.Models;
-using InStock._DAL.Models;
 
 namespace InStock.Controllers
 {

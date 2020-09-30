@@ -73,7 +73,6 @@ else if (this.title == "Edit") {
     name: this.itemForm.get('name').value
     
   };
- // console.log(item)
   this._itemService.editItemById(item.id, item)
         .subscribe((data) => {
           this._router.navigate(['/get-items']);
