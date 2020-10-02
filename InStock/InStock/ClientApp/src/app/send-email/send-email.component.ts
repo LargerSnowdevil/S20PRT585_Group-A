@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Email } from '../models/email';
 import { EmailService } from '../services/email.service';
 import { SendMailService } from '../services/send-mail.service';
-
+import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
@@ -15,13 +15,13 @@ export class SendEmailComponent implements OnInit {
   mailForm: FormGroup;
   emailId:0;
   femailAddress:string;
-  //toEmail:string;
+
+  emails$: Observable<Email[]>;
+
+  
   fsubject:string;
   fbody:string;
-  // email:{
-  //   emailId:number;
-  //   emailAddress:string;
-  // }
+
   errorMessage: any;
   existingEmail: Email;
   form: any;
@@ -31,16 +31,15 @@ export class SendEmailComponent implements OnInit {
     this.femailAddress = 'emailAddress';
     this.fbody='body';
     this.fsubject='subject';
-    // this.subject = 'subject';
-    // this.body = 'body';
-    //this.email.emailAddress='emailAddress';
-    if (this.avRoute.snapshot.params[idParam]) {
-      this.emailId = this.avRoute.snapshot.params[idParam];
-    }
+
+    // if (this.avRoute.snapshot.params[idParam]) {
+    //   this.emailId = this.avRoute.snapshot.params[idParam];
+    // }
+
     this.mailForm = this.formBuilder.group(
       {
         emailId:0,
-        emailAddress:['', ],
+        emailAddress:['', [Validators.required]],  
         body:['', ],
         subject:['', ],
         
@@ -52,14 +51,22 @@ export class SendEmailComponent implements OnInit {
   }
 
   ngOnInit() {
+      //pass the exact value to the emailaddress
+      // this._emailService. getEmailinforbyId(this.emailId)
+      //   .subscribe(data => (
+      //     this.existingEmail = data,
+      //     this.mailForm.controls[this.femailAddress].setValue(data.emailAddress)
+      //  ));
+      this.loadEmails();
 
-      this._emailService. getEmailinforbyId(this.emailId)
-        .subscribe(data => (
-          this.existingEmail = data,
-          this.mailForm.controls[this.femailAddress].setValue(data.emailAddress)
-       ));
 
   }
+  loadEmails() {
+    this.emails$ = this._emailService.getEmailinfor();
+    
+  }
+  
+
   sendEmail(){
 
     if (!this.mailForm.valid) {
@@ -73,7 +80,7 @@ export class SendEmailComponent implements OnInit {
   
       this._sendService.sendMail(formData)
       .subscribe((data) => {
-        this._router.navigate(['']);
+        this._router.navigate(['/add-email']);
       });
   
   }

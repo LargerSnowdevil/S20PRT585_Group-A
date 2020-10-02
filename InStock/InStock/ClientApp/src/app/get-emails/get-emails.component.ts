@@ -16,10 +16,10 @@ export class GetEmailsComponent implements OnInit {
   constructor(private emailService: EmailService) {
   }
   ngOnInit() {
-    this.loadShops();
+    this.loadEmails();
   }
 
-  loadShops() {
+  loadEmails() {
     this.emails$ = this.emailService.getEmailinfor();
   }
 

@@ -26,6 +26,7 @@ import { EmailService } from "./services/email.service";
 import { GetEmailsComponent } from "./get-emails/get-emails.component";
 import { SendEmailComponent } from "./send-email/send-email.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,

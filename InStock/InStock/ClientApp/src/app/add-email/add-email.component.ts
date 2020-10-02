@@ -49,7 +49,7 @@ export class AddEmailComponent implements OnInit {
      // console.log(item)
       this._emailService.addEmail(email)
       .subscribe((data) => {
-        this._router.navigate(['/get-email']);
+        this._router.navigate(['/send-email']);
       });
      
 }
