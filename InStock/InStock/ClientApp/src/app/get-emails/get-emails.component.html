@@ -1,0 +1,20 @@
+<h1>Email List</h1>
+
+<p *ngIf="!(emails$ | async)"><em>Loading....</em></p>
+<table class="table table-sm table-hover" *ngIf="(emails$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Address</th>
+   
+      <th></th>
+      <th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let email of (emails$ | async)">
+      <td><a>{{ email.emailAddress }}</a></td> 
+      <td><a [routerLink]="['/send-email/',email.emailId]" (click)="SendEmail" class="btn btn-danger btn-sm float-right">SendEmail</a></td> 
+    </tr>
+  </tbody>
+</table>
