@@ -1,13 +1,6 @@
 <h1>Email</h1>
 <div class="container">
 <form [formGroup]="mailForm" (ngSubmit)="sendEmail()"  #formDir="ngForm" novalidate >
-    <!-- no drop list -->
-    <!-- <div class="form-group row">
-        <label class=" control-label col-md-12 ">EmailAddress</label>
-        <div class="col-md-4">
-            <input class="form-control" type="text" formControlName="emailAddress" >
-        </div> -->
-        <!-- droplist --> 
         <div class="form-group row">
             <label class="control-label col-md-12" for="EmailAddress">EmailAddress</label>  
             <div class="col-md-4">
@@ -20,7 +13,7 @@
         </select>  
          </div>
          <span class="text-danger" *ngIf="emailAddress.invalid && formDir.submitted">
-            EmailAddress Name is required.
+            EmailAddress is required.
         </span>
         </div>
 

@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Inventory } from '../models/inventory';
+import { Inventory } from '../models/inventories';
+import { SingleInventory } from '../models/Single-Inventory';
 
 @Injectable({
   providedIn: 'root'
@@ -38,16 +39,16 @@ export class InventoryService {
 }
 
 
-addInventory(inventory): Observable<Inventory> {
-  return this.http.post<Inventory>(this.myAppUrl + this.myApiUrl, JSON.stringify(inventory), this.httpOptions)
+addInventory(inventory): Observable<SingleInventory> {
+  return this.http.post<SingleInventory>(this.myAppUrl + this.myApiUrl, JSON.stringify(inventory), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.errorHandler)
   );
 }
 
-editInventoryById(inventoryId: number, inventory): Observable<Inventory> {
-  return this.http.put<Inventory>(this.myAppUrl + this.myApiUrl + inventoryId, JSON.stringify(inventory), this.httpOptions)
+editInventoryById(inventoryId: number, inventory): Observable<SingleInventory> {
+  return this.http.put<SingleInventory>(this.myAppUrl + this.myApiUrl + inventoryId, JSON.stringify(inventory), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.errorHandler)
