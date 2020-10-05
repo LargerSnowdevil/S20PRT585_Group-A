@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Email } from '../models/email';
 import { EmailService } from '../services/email.service';
 import { SendMailService } from '../services/send-mail.service';
-import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
