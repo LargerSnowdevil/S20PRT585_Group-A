@@ -2,6 +2,7 @@
 using InStock._DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,6 +51,7 @@ namespace InStock._DAL.Services
             {
                 Id = efItem.ItemId,
                 Name = efItem.Name,
+                
             };
 
             return retItem;
@@ -65,7 +67,7 @@ namespace InStock._DAL.Services
                 retItems.Add(new ItemBll
                 {
                     Id = item.ItemId,
-                    Name = item.Name,
+                    Name = item.Name
                 });
             }
 
@@ -74,15 +76,31 @@ namespace InStock._DAL.Services
 
         public async Task PostItem(ItemBll item)
         {
-            //Todo ensure this method runs correctly im not great with async calls
-            var efItem = new Item
-            {
-                ItemId = item.Id,
-                Name = item.Name,
-            };
 
-            _context.Items.Add(efItem);
-            await _context.SaveChangesAsync();
+            if (item.Image != null)
+            {
+                if (item.Image.Length > 0)
+                {
+                    byte[] img = null;
+                    using (var sr = item.Image.OpenReadStream())
+                    using (var ms = new MemoryStream())
+                    {
+                        sr.CopyTo(ms);
+                        img = ms.ToArray();
+                    }
+
+                    var efItem = new Item
+                    {
+                        ItemId = item.Id,
+                        Name = item.Name,
+                        Image = img
+                    };
+
+                    _context.Items.Add(efItem);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            
         }
 
         public async Task PutItem(int id, ItemBll item)

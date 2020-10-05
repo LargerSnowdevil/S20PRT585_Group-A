@@ -45,8 +45,8 @@ getItemBySearch(itemName: string): Observable<Items> {
   );
 }
 
-addItem(item): Observable<Items> {
-  return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions)
+addItem(item) {
+  return this.http.post<any>(this.myAppUrl + this.myApiUrl, item)
   .pipe(
     retry(1),
     catchError(this.errorHandler)

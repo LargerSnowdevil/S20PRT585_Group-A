@@ -9,17 +9,14 @@ namespace InStock._DAL.Models
 {
     public class Item
     {
-            [Key]
-            public int ItemId { get; set; }
+        [Key]
+        public int ItemId { get; set; }
 
-            [Column(TypeName = "varchar(32)")]
-            public string Name { get; set; }
+        [Column(TypeName = "varchar(32)")]
+        public string Name { get; set; }
 
-            public List<Inventory> Inventory { get; set; }
+        public List<Inventory> Inventory { get; set; }
  
-
-          
-
-
+        public Byte[] Image { get; set; }
     }
 }

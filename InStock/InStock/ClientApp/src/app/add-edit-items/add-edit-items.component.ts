@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-edit-items.component.css']
 })
 export class AddEditItemsComponent implements OnInit {
+  imageFile: File = null;
   itemForm: FormGroup;
   title: string;
   id: number;
@@ -27,8 +28,7 @@ export class AddEditItemsComponent implements OnInit {
    
     this.itemForm = this.formBuilder.group({  
       id: 0,  
-      name: ['', [Validators.required]],  
-    
+      name: ['', [Validators.required]],
   })   
     }
 
@@ -54,13 +54,14 @@ export class AddEditItemsComponent implements OnInit {
       return;
     }
     if (this.title == "Add") {
-      let item: Items = {
-        name: this.itemForm.get('name').value,
-       
-      };
-      console.log(item)
-     // console.log(item)
-      this._itemService.addItem(item)
+      var formData: any = new FormData();
+      formData.append("name", this.itemForm.get('name').value);
+      formData.append("image", this.imageFile, this.imageFile.name);
+
+     console.log(formData.getAll("name"))
+     console.log(formData.getAll("image"))
+
+      this._itemService.addItem(formData)
       .subscribe((data) => {
         this._router.navigate(['/get-items']);
       });
@@ -70,8 +71,8 @@ export class AddEditItemsComponent implements OnInit {
 else if (this.title == "Edit") {  
   let item: Items = {
     id: this.existingItem.id,
-    name: this.itemForm.get('name').value
-    
+    name: this.itemForm.get('name').value,
+    image: this.imageFile
   };
   this._itemService.editItemById(item.id, item)
         .subscribe((data) => {
@@ -86,5 +87,10 @@ cancel() {
     }  
   
     get name() { return this.itemForm.get('name'); }
-   
+    get image() { return this.itemForm.get('file'); }
+    imageInputChanged(event) {
+      this.imageFile = event.target.files[0];
+      //console.log(this.imageFile);
+    }
+
 }
