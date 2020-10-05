@@ -11,7 +11,6 @@ namespace InStock._BLL.Services
     public interface IItemServiceBll
     {
         IEnumerable<ItemBll> GetItems();
-        IEnumerable<ItemBll> Search(string name);
         ItemBll GetItem(int id);
         Task PutItem(int id, ItemBll item);
 
@@ -53,22 +52,6 @@ namespace InStock._BLL.Services
         public Task PutItem(int id, ItemBll item)
         {
             return _itemService.PutItem(id, item);
-        }
-
-        public IEnumerable<ItemBll> Search(string name)
-        {
-            var items = _itemService.GetItems();
-            var retItems = new List<ItemBll>();
-
-            foreach (var item in items)
-            {
-                if (item.Name.CompareTo(name) == 0)
-                {
-                    retItems.Add(item);
-                }
-            }
-
-            return retItems;
         }
     }
 

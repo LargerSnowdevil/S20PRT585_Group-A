@@ -56,6 +56,8 @@
     <Compile Remove="Migrations\20200923092102_latest.Designer.cs" />
     <Compile Remove="Migrations\20200928085038_third.cs" />
     <Compile Remove="Migrations\20200928085038_third.Designer.cs" />
+    <Compile Remove="Migrations\20201005034056_searchChange.cs" />
+    <Compile Remove="Migrations\20201005034056_searchChange.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
