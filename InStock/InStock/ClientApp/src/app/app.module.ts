@@ -13,14 +13,18 @@ import { ShopsService} from './services/shops.service';
 import { SendMailService} from './services/send-mail.service';
 import { InventoryService} from './services/inventory.service';
 import { GetShopsComponent} from './get-shops/get-shops.component';
-import { GetShopComponent} from './get-shop/get-shop.component';
+import { GetShopComponent} from './get-single-shop/get-shop.component';
 import { AddEditShopsComponent} from './add-edit-shops/add-edit-shops.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
-import { GetItemComponent} from './get-item/get-item.component';
+import { GetItemComponent} from './get-single-item/get-item.component';
 import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
-import { GetInventoryComponent} from './get-inventory/get-inventory.component';
+import { GetInventoryComponent} from './get-single-inventory/get-inventory.component';
 import { AddEditInventoryComponent} from './add-edit-inventory/add-edit-inventory.component';
-import { MailComponent} from'./mail/mail.component';
+import { MailComponent} from'./Email-Subscribers/mail.component';
+import { AddEmailComponent } from "./subscribe/add-email.component";
+import { EmailService } from "./services/email.service";
+import { SendEmailComponent } from "./send-email/send-email.component";
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { MailComponent} from'./mail/mail.component';
     AddEditShopsComponent,
     GetInventoriesComponent,
     GetInventoryComponent,
-    AddEditInventoryComponent
+    AddEditInventoryComponent,
+    AddEmailComponent,
+    SendEmailComponent
 
     ],
   imports: [
@@ -60,15 +66,18 @@ import { MailComponent} from'./mail/mail.component';
      { path: 'get-inventory', component : GetInventoryComponent},
      { path: 'edit-inventory/:id', component : AddEditInventoryComponent},
      { path: 'add-inventory', component : AddEditInventoryComponent},
-    { path: 'mail', component : MailComponent}
-
+      { path: 'mail', component : MailComponent},
+      { path: 'add-email', component : AddEmailComponent},
+      { path: 'send-email', component : SendEmailComponent},
+      { path: 'send-email/:id', component : SendEmailComponent}
     ])
   ],
   providers: [
     ItemsService,
     ShopsService,
     InventoryService,
-    SendMailService
+    SendMailService,
+    EmailService
   ],
   bootstrap: [AppComponent]
 })
