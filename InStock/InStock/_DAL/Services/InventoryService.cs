@@ -61,7 +61,11 @@ namespace InStock._DAL.Services
                 Shops = new ShopBll
                 {
                     ShopId = shp.ShopId,
-                    Name = shp.Name
+                    Name = shp.Name,
+                    Address = shp.Address,
+                    ContactNumber = shp.ContactNumber,
+                    Lat = shp.Lat,
+                    Long = shp.Long
                 }
             };
 
@@ -93,7 +97,11 @@ namespace InStock._DAL.Services
                     Shops = new ShopBll
                     {
                         ShopId = shp.ShopId,
-                        Name = shp.Name
+                        Name = shp.Name,
+                        Address = shp.Address,
+                        ContactNumber = shp.ContactNumber,
+                        Lat = shp.Lat,
+                        Long = shp.Long
                     }
 
                 });
