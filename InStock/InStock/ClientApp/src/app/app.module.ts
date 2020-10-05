@@ -15,7 +15,6 @@ import { InventoryService} from './services/inventory.service';
 import { GetShopsComponent} from './get-shops/get-shops.component';
 import { GetShopComponent} from './get-single-shop/get-shop.component';
 import { AddEditShopsComponent} from './add-edit-shops/add-edit-shops.component';
-import { ItemSearchComponent } from './item-search/item-search.component';
 import { GetItemComponent} from './get-single-item/get-item.component';
 import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
 import { GetInventoryComponent} from './get-single-inventory/get-inventory.component';
@@ -35,7 +34,6 @@ import { SendEmailComponent } from "./send-email/send-email.component";
     AddEditItemsComponent,
     GetItemComponent,
     MailComponent,
-    ItemSearchComponent,
     GetShopsComponent,
     GetShopComponent,
     AddEditShopsComponent,
@@ -61,7 +59,6 @@ import { SendEmailComponent } from "./send-email/send-email.component";
      { path: 'edit-shop/:id', component: AddEditShopsComponent },
      { path: 'add-shop', component: AddEditShopsComponent },
      { path: 'shop/:id', component: GetShopComponent },
-     { path: 'item-search', component: ItemSearchComponent },
      { path: 'get-inventories', component : GetInventoriesComponent},
      { path: 'get-inventory', component : GetInventoryComponent},
      { path: 'edit-inventory/:id', component : AddEditInventoryComponent},

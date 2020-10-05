@@ -62,6 +62,14 @@ deleteInventory(inventoryId: number): Observable<Inventory> {
     catchError(this.errorHandler)
   );
 }
+
+getInventoryBySearch(string: string): Observable<Inventory> {
+  return this.http.get<Inventory>(this.myAppUrl + this.myApiUrl + "search/" + string)
+  .pipe(
+    retry(1),
+    catchError(this.errorHandler)
+  );
+}
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
