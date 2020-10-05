@@ -352,3 +352,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 InStock/InStock/appsettings.json
+InStock/.vs/InStock/v16/.suo
+InStock/.vs/InStock/DesignTimeBuild/.dtbcache.v2
