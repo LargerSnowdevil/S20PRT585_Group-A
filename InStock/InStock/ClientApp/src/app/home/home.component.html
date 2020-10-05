@@ -1,1 +1,35 @@
 <h1>Welcome to InStock</h1>
+
+<form [formGroup]="form" (ngSubmit)="searchText()"  #formDir="ngForm" novalidate >
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="search">Search For an Item</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" formControlName="search">
+        </div>
+        <span class="text-danger" *ngIf="searchText.invalid && formDir.submitted">
+            Text is required
+        </span>
+    </div>
+    <button type="submit" class="btn btn-success ">Search</button>
+  </form>
+
+  <table class="table table-sm table-hover" *ngIf="(inventories$ | async)?.length>0">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+      <th>In Stock</th>
+      <th>Quantity</th>
+      <th>Available At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of (inventories$ | async)">
+            <td>{{result.items.name}}</td>  
+           <td><span *ngIf="result.available" class="badge badge-info">True</span>
+             <span *ngIf="!result.available" class="badge badge-danger">False</span>
+         </td>
+           <td>{{result.quantity}}</td>
+          <td>{{result.shops.name}}</td> 
+      </tr>
+    </tbody>
+  </table>

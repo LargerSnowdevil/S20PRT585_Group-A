@@ -37,13 +37,7 @@ export class ItemsService {
     );
 }
   
-getItemBySearch(itemName: string): Observable<Items> {
-  return this.http.get<Items>(this.myAppUrl + this.myApiUrl + "search/" + itemName)
-  .pipe(
-    retry(1),
-    catchError(this.errorHandler)
-  );
-}
+
 
 addItem(item): Observable<Items> {
   return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions)
