@@ -74,5 +74,11 @@ namespace InStock.Controllers
 
             return item;
         }
+
+        [HttpGet("search/{name}")]
+        public ActionResult<IEnumerable<InventoryBll>> Search(string name)
+        {
+            return _itemService.Search(name).ToList();
+        }
     }
 }

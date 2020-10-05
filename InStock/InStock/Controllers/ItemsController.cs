@@ -27,12 +27,6 @@ namespace InStock.Controllers
         {
             return _itemService.GetItems().ToList();
         }
-        [HttpGet("search/{name}")]
-        public ActionResult<IEnumerable<ItemBll>> Search(string name)
-        {
-            //Todo search currently is case sencitive change this later
-            return _itemService.Search(name).ToList();
-        }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
