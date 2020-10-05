@@ -50,12 +50,6 @@ export class SendEmailComponent implements OnInit {
   }
 
   ngOnInit() {
-      //pass the exact value to the emailaddress
-      // this._emailService. getEmailinforbyId(this.emailId)
-      //   .subscribe(data => (
-      //     this.existingEmail = data,
-      //     this.mailForm.controls[this.femailAddress].setValue(data.emailAddress)
-      //  ));
       this.loadEmails();
 
 

@@ -3,23 +3,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Email } from '../models/email';
 import { EmailService } from '../services/email.service';
-
+import { SendMailService } from '../services/send-mail.service';
 @Component({
   selector: 'app-add-email',
   templateUrl: './add-email.component.html',
   styleUrls: ['./add-email.component.css']
 })
 export class AddEmailComponent implements OnInit {
-
   mailinfoForm: FormGroup;
-  //title: string;
   emailId: number;
   femailAddress:string;
   errorMessage: any;
   existingEmail :Email;
   private sub: any;
-  constructor(private _emailService: EmailService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
-    //this.title="Add";
+  constructor(private _emailService: EmailService,private _sendService: SendMailService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.femailAddress="emailAddress";
    
    
@@ -44,12 +41,18 @@ export class AddEmailComponent implements OnInit {
     let email: Email = {
     emailAddress: this.mailinfoForm.get('emailAddress').value,
     };
-       
-      console.log(email)
-     // console.log(item)
+    var formData: any = new FormData();
+    formData.append("emailAddress", this.mailinfoForm.get('emailAddress').value);
+    formData.append("subject", "Welcome");
+    formData.append("body", "Thankyou for subscribing to InStock!");
+  
+      this._sendService.sendMail(formData)
+      .subscribe((data) => {
+      });
+
       this._emailService.addEmail(email)
       .subscribe((data) => {
-        this._router.navigate(['/send-email']);
+        this._router.navigate(['']);
       });
      
 }

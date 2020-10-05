@@ -36,14 +36,6 @@ export class EmailService {
     );
 }
   
-// getItemBySearch(itemName: string): Observable<Items> {
-//   return this.http.get<Items>(this.myAppUrl + this.myApiUrl + "search/" + itemName)
-//   .pipe(
-//     retry(1),
-//     catchError(this.errorHandler)
-//   );
-// }
-
 addEmail(email): Observable<Email> {
   return this.http.post<Email>(this.myAppUrl + this.myApiUrl, JSON.stringify(email), this.httpOptions)
   .pipe(
@@ -52,21 +44,6 @@ addEmail(email): Observable<Email> {
   );
 }
 
-// editItemById(itemId: number, item): Observable<Items> {
-//   return this.http.put<Items>(this.myAppUrl + this.myApiUrl + itemId, JSON.stringify(item), this.httpOptions)
-//   .pipe(
-//     retry(1),
-//     catchError(this.errorHandler)
-//   );
-// }
-  
-// deleteItem(itemId: number): Observable<Items> {
-//   return this.http.delete<Items>(this.myAppUrl + this.myApiUrl + itemId)
-//   .pipe(
-//     retry(1),
-//     catchError(this.errorHandler)
-//   );
-// }
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
