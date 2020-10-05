@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ItemsService } from '../services/items.service';
 import { InventoryService } from '../services/inventory.service';
 import { Shops } from '../models/shop';
-import { Inventory } from '../models/inventory';
+import { Inventory } from '../models/inventories';
 @Component({
   selector: 'app-get-inventories',
   templateUrl: './get-inventories.component.html',

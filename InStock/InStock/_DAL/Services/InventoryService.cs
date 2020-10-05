@@ -119,8 +119,7 @@ namespace InStock._DAL.Services
                 Available = item.Available,
                 Quantity = item.Quantity,
                 ShopId = item.ShopId,
-                ItemId = item.ItemId,
-
+                ItemId = item.ItemId
             };
 
             _context.Inventories.Add(efItem);
