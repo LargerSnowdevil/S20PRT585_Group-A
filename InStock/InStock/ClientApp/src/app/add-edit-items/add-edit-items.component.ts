@@ -58,8 +58,8 @@ export class AddEditItemsComponent implements OnInit {
       formData.append("name", this.itemForm.get('name').value);
       formData.append("image", this.imageFile, this.imageFile.name);
 
-     console.log(formData.getAll("name"))
-     console.log(formData.getAll("image"))
+     //console.log(formData.getAll("name"))
+     //console.log(formData.getAll("image"))
 
       this._itemService.addItem(formData)
       .subscribe((data) => {
@@ -88,6 +88,7 @@ cancel() {
   
     get name() { return this.itemForm.get('name'); }
     get image() { return this.itemForm.get('file'); }
+
     imageInputChanged(event) {
       this.imageFile = event.target.files[0];
       //console.log(this.imageFile);

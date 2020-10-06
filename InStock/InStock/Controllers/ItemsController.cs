@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InStock._BLL.Services;
 using InStock._BLL.Models;
+using System.IO;
+using InStock.models;
 
 namespace InStock.Controllers
 {
@@ -39,7 +41,7 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, ItemBll item)
+        public async Task<IActionResult> PutItem(int id, [FromForm] ItemBll item)
         {
             if (id != item.Id)
             {
@@ -55,9 +57,24 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<ItemBll>> PostItem([FromForm] ItemBll item)
+        public async Task<ActionResult<ItemBll>> PostItem([FromForm] ItemImgUp item)
         {
-            await _itemService.PostItem(item);
+            byte[] img = null;
+            using (var sr = item.Image.OpenReadStream())
+            using (var ms = new MemoryStream())
+            {
+                sr.CopyTo(ms);
+                img = ms.ToArray();
+            }
+
+            var blItem = new ItemBll
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Image = img
+            };
+
+            await _itemService.PostItem(blItem);
 
             return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }

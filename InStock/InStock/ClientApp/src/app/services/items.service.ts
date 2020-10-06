@@ -45,16 +45,17 @@ getItemBySearch(itemName: string): Observable<Items> {
   );
 }
 
-addItem(item) {
-  return this.http.post<any>(this.myAppUrl + this.myApiUrl, item)
+addItem(formdata) {
+  return this.http.post<any>(this.myAppUrl + this.myApiUrl, formdata)
   .pipe(
-    retry(1),
+    //Todo this is causing the multiple requests change it back to 1 retry when i fix the 500 responce errors
+    retry(0),
     catchError(this.errorHandler)
   );
 }
 
-editItemById(itemId: number, item): Observable<Items> {
-  return this.http.put<Items>(this.myAppUrl + this.myApiUrl + itemId, JSON.stringify(item), this.httpOptions)
+editItemById(itemId: number, formdata): Observable<Items> {
+  return this.http.put<any>(this.myAppUrl + this.myApiUrl + itemId, formdata)
   .pipe(
     retry(1),
     catchError(this.errorHandler)

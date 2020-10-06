@@ -17,6 +17,6 @@ namespace InStock._DAL.Models
 
         public List<Inventory> Inventory { get; set; }
  
-        public Byte[] Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

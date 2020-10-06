@@ -99,6 +99,16 @@ namespace InStock._DAL.Services
                     _context.Items.Add(efItem);
                     await _context.SaveChangesAsync();
                 }
+            } else
+            {
+                var efItem = new Item
+                {
+                    ItemId = item.Id,
+                    Name = item.Name
+                };
+
+                _context.Items.Add(efItem);
+                await _context.SaveChangesAsync();
             }
             
         }

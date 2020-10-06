@@ -67,9 +67,11 @@ import { SendEmailComponent } from "./send-email/send-email.component";
      { path: 'edit-inventory/:id', component : AddEditInventoryComponent},
      { path: 'add-inventory', component : AddEditInventoryComponent},
      { path: 'mail', component : MailComponent},
-      { path: 'add-email', component : AddEmailComponent},
-      { path: 'send-email', component : SendEmailComponent},
-      { path: 'send-email/:id', component : SendEmailComponent}
+     { path: 'add-email', component : AddEmailComponent},
+     { path: 'send-email', component : SendEmailComponent},
+     { path: 'send-email/:id', component : SendEmailComponent},
+
+     { path: '**', redirectTo: '/' }
     ])
   ],
   providers: [
