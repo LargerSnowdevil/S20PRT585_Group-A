@@ -29,8 +29,8 @@
             Address is required
         </span>
     </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="lat">Lat</label>
+    <!-- <div class="form-group row">
+        <label class="control-label col-md-12" for="lat">Latitude</label>
         <div class="col-md-4">
             <input class="form-control" type="number" formControlName="lat">
         </div>
@@ -39,15 +39,64 @@
         </span>
     </div>
     <div class="form-group row">
-        <label class="control-label col-md-12" for="long">Long</label>
+        <label class="control-label col-md-12" for="long">longitude</label>
         <div class="col-md-4">
             <input class="form-control" type="number" formControlName="long">
         </div>
         <span class="text-danger" *ngIf="long.invalid && formDir.submitted">
             long is required
         </span>
+    </div> -->
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="latitude">Latitude:{{latitude}}</label>
     </div>
-    
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="longitude">Longitude: {{longitude}}</label>
+    </div>
+      <agm-map 
+            [latitude]="latitude" 
+            [longitude]="longitude" 
+            [zoom]="zoom" 
+            (mapClick)="onChoseLocation($event)">
+        <agm-marker 
+            [latitude]="latitude" 
+            [longitude]="longitude"
+            *ngIf="locationChosen">
+
+        </agm-marker>
+    </agm-map>
+    <!-- <div class="form-group row">
+        <div>Latitude: {{latitude}}</div>
+        <div class="col-md-4">
+            <label class="form-control" type="number" formControlName="lat">
+        </div>
+        
+    </div> -->
+    <!-- <div class="form-group row">
+        <label class="control-label col-md-12" for="long">longitude</label>
+        <div class="col-md-4">
+            <class="form-control" type="number" formControlName="long">
+        </div>
+       
+    </div> -->
+    <!-- <div class="container">
+      
+        <div class="form-group">
+          <label>Enter address</label>
+          <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+        </div>
+      
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+            (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map>
+      
+        <h5>Address: {{saddress}}</h5>
+        <div>Latitude: {{latitude}}</div>
+        <div>Longitude: {{longitude}}</div>
+      </div> -->
+
+
     <div class="form-group">
         <button type="submit" class="btn btn-success ">Save</button>
         <button class="btn btn-secondary float-left"(click)="cancel()">Cancel</button>

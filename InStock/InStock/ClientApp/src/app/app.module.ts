@@ -23,6 +23,7 @@ import { MailComponent} from'./Email-Subscribers/mail.component';
 import { AddEmailComponent } from "./subscribe/add-email.component";
 import { EmailService } from "./services/email.service";
 import { SendEmailComponent } from "./send-email/send-email.component";
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -48,6 +49,10 @@ import { SendEmailComponent } from "./send-email/send-email.component";
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCpnRBNPG4ASi7Ak4V6mAWOHAiwvW-mFm4',
+      libraries: ['places']
+    }),
     ReactiveFormsModule,
     RouterModule.forRoot([
      { path: '', component: HomeComponent, pathMatch: 'full' },
