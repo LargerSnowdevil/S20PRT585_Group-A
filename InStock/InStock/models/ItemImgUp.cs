@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InStock.models
 {
-    public class ItemImgUp
+    public class ItemImgUpViewModel
     {
         public int Id { get; set; }
 

@@ -41,14 +41,29 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, [FromForm] ItemBll item)
+        public async Task<IActionResult> PutItem(int id, [FromForm] ItemImgUpViewModel item)
         {
             if (id != item.Id)
             {
                 return BadRequest();
             }
 
-            await _itemService.PutItem(id, item);
+            byte[] img = null;
+            using (var sr = item.Image.OpenReadStream())
+            using (var ms = new MemoryStream())
+            {
+                sr.CopyTo(ms);
+                img = ms.ToArray();
+            }
+
+            var blItem = new ItemBll
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Image = img
+            };
+
+            await _itemService.PutItem(id, blItem);
 
             return NoContent();
         }
@@ -57,7 +72,7 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<ItemBll>> PostItem([FromForm] ItemImgUp item)
+        public async Task<ActionResult<ItemBll>> PostItem([FromForm] ItemImgUpViewModel item)
         {
             byte[] img = null;
             using (var sr = item.Image.OpenReadStream())
@@ -76,7 +91,7 @@ namespace InStock.Controllers
 
             await _itemService.PostItem(blItem);
 
-            return CreatedAtAction("GetItem", new { id = item.Id }, item);
+            return CreatedAtAction("GetItem", new { id = blItem.Id }, blItem);
         }
 
         // DELETE: api/Items/5

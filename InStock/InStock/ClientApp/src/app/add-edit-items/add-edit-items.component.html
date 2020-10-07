@@ -9,6 +9,7 @@
         </div>
         <label class=" control-label col-md-12 ">Item Image</label>
         <div class="col-md-4">
+            <img>
             <input class="form-control" type="file" (change)="imageInputChanged($event)">
         </div>
         <span class="text-danger" *ngIf="name.invalid && formDir.submitted">

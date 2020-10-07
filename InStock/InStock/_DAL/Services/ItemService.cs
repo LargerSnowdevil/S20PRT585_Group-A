@@ -76,41 +76,16 @@ namespace InStock._DAL.Services
 
         public async Task PostItem(ItemBll item)
         {
-
-            if (item.Image != null)
+            //Todo set defualt image if none is supplyed
+            var efItem = new Item
             {
-                if (item.Image.Length > 0)
-                {
-                    byte[] img = null;
-                    using (var sr = item.Image.OpenReadStream())
-                    using (var ms = new MemoryStream())
-                    {
-                        sr.CopyTo(ms);
-                        img = ms.ToArray();
-                    }
+                ItemId = item.Id,
+                Name = item.Name,
+                Image = item.Image
+            };
 
-                    var efItem = new Item
-                    {
-                        ItemId = item.Id,
-                        Name = item.Name,
-                        Image = img
-                    };
-
-                    _context.Items.Add(efItem);
-                    await _context.SaveChangesAsync();
-                }
-            } else
-            {
-                var efItem = new Item
-                {
-                    ItemId = item.Id,
-                    Name = item.Name
-                };
-
-                _context.Items.Add(efItem);
-                await _context.SaveChangesAsync();
-            }
-            
+            _context.Items.Add(efItem);
+            await _context.SaveChangesAsync();
         }
 
         public async Task PutItem(int id, ItemBll item)

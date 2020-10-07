@@ -54,7 +54,7 @@ addItem(formdata) {
   );
 }
 
-editItemById(itemId: number, formdata): Observable<Items> {
+editItemById(itemId: number, formdata) {
   return this.http.put<any>(this.myAppUrl + this.myApiUrl + itemId, formdata)
   .pipe(
     retry(1),

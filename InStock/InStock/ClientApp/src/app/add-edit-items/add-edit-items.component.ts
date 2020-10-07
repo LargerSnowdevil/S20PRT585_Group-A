@@ -69,6 +69,10 @@ export class AddEditItemsComponent implements OnInit {
 }  
 
 else if (this.title == "Edit") {  
+  var formData: any = new FormData();
+  formData.append("name", this.itemForm.get('name').value);
+  formData.append("image", this.imageFile, this.imageFile.name);
+
   let item: Items = {
     id: this.existingItem.id,
     name: this.itemForm.get('name').value,
