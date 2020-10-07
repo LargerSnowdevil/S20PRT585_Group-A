@@ -60,7 +60,7 @@ namespace InStock.Controllers
             {
                 Id = item.Id,
                 Name = item.Name,
-                Image = img
+                Image = Convert.ToBase64String(img)
             };
 
             await _itemService.PutItem(id, blItem);
@@ -86,7 +86,7 @@ namespace InStock.Controllers
             {
                 Id = item.Id,
                 Name = item.Name,
-                Image = img
+                Image = Convert.ToBase64String(img)
             };
 
             await _itemService.PostItem(blItem);

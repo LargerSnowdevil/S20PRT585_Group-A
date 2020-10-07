@@ -51,7 +51,7 @@ namespace InStock._DAL.Services
             {
                 Id = efItem.ItemId,
                 Name = efItem.Name,
-                
+                Image = Convert.ToBase64String(efItem.Image)
             };
 
             return retItem;
@@ -67,7 +67,8 @@ namespace InStock._DAL.Services
                 retItems.Add(new ItemBll
                 {
                     Id = item.ItemId,
-                    Name = item.Name
+                    Name = item.Name,
+                    Image = Convert.ToBase64String(item.Image)
                 });
             }
 
@@ -81,7 +82,7 @@ namespace InStock._DAL.Services
             {
                 ItemId = item.Id,
                 Name = item.Name,
-                Image = item.Image
+                Image = Convert.FromBase64String(item.Image)
             };
 
             _context.Items.Add(efItem);
@@ -96,6 +97,7 @@ namespace InStock._DAL.Services
             if (efItem != null)
             {
                 efItem.Name = item.Name;
+                efItem.Image = Convert.FromBase64String(item.Image);
 
                 _context.Items.Update(efItem);
                 await _context.SaveChangesAsync();
