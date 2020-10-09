@@ -1,4 +1,4 @@
-<h1>Welcome to InStock</h1>
+<h1 color="custom-theme-accent">Welcome to InStock</h1>
 
 <form [formGroup]="form" (ngSubmit)="searchText()"  #formDir="ngForm" novalidate >
     <div class="form-group row">
@@ -13,7 +13,7 @@
     <button type="submit" class="btn btn-success ">Search</button>
   </form>
 
-  <table class="table table-sm table-hover" *ngIf="(inventories$ | async)?.length>0">
+  <table class="table table-sm table-hover " *ngIf="(inventories$ | async)?.length>0">
     <thead>
       <tr>
         <th>Item Name</th>
