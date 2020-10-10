@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace COMMON.BLLModels
+namespace COMMON
 {
-    public class Shop
+    public class ShopBll
     {
         public int ShopId { get; set; }
 

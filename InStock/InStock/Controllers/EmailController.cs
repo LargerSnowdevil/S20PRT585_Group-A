@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InStock._BLL.Models;
-using InStock._BLL.Services;
+using COMMON;
+using _BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +13,9 @@ namespace InStock.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly EEmailServiceBll _emailService;
+        private readonly EmailServiceBll _emailService;
 
-        public EmailController(EEmailServiceBll emailService)
+        public EmailController(EmailServiceBll emailService)
         {
             _emailService = emailService;
         }

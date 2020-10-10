@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace COMMON
+namespace _DAL
 {
-    public class EmailBll
+    public class Email
     {
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmailId { get; set; }
         public string EmailAddress { get; set; }

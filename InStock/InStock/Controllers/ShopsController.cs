@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using InStock._BLL.Services;
-using InStock._BLL.Models;
-using InStock._DAL.Models;
+using COMMON;
+using _BLL;
 
 namespace InStock.Controllers
 {
