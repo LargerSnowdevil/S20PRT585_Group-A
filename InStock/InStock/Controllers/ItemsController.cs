@@ -64,13 +64,7 @@ namespace InStock.Controllers
         [HttpPost]
         public async Task<ActionResult<ItemBll>> PostItem([FromBody] ItemBll item)
         {
-            //byte[] img = null;
-            //using (var sr = item.Image.OpenReadStream())
-            //using (var ms = new MemoryStream())
-            //{
-            //    sr.CopyTo(ms);
-            //    img = ms.ToArray();
-            //}
+      
 
             var blItem = new ItemBll
             {
