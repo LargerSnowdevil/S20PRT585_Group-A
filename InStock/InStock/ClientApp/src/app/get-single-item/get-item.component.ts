@@ -12,7 +12,7 @@ import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 })
 export class GetItemComponent implements OnInit {
   item$: Observable<Items>;
-  imgData: SafeResourceUrl;
+  imgData: string;
   itemId: number;
   constructor(private _itemService: ItemsService, private avRoute: ActivatedRoute) {
     const idParam = 'id';

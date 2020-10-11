@@ -7,15 +7,32 @@
         <div class="col-md-4">
             <input class="form-control" type="text" formControlName="name" >
         </div>
-        <label class=" control-label col-md-12 "></label>
-        <div class="col-md-8">
-            <label>Upload An Image (&lt; 1MB)</label><br/>
-            <input class="form-control" type="file" (change)="onFileChange($event)">
-            <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>
-        </div>
         <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
             Name is required.
         </span>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+        
+            <label class=" control-label col-md-12 ">Upload Item Image</label>
+                {{imageError}}
+                <div class="custom-file fileInputProfileWrap">
+                    <input type="file" (change)="onFileChange($event)" class="fileInputProfile">
+                    <div class="img-space">
+
+                        <ng-container *ngIf="isImageSaved; else elseTemplate">
+                            <img [src]="itemImage" />
+                        </ng-container>
+                        <ng-template #elseTemplate>
+
+                            <img src="../../assets/imgPlaceholder.png" class="img-responsive">
+                        </ng-template>
+
+                    </div>
+
+                </div>
+                <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>
+    </div>
     </div>
 
     <div class="form-group">
