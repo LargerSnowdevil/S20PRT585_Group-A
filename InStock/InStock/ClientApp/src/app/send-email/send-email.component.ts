@@ -65,7 +65,7 @@ export class SendEmailComponent implements OnInit {
     if (!this.mailForm.valid) {
       return;
     }
-    console.log(this.mailForm.value)
+    //console.log(this.mailForm.value)
     var formData: any = new FormData();
     formData.append("emailAddress", this.mailForm.get('emailAddress').value);
     formData.append("subject", this.mailForm.get('subject').value);

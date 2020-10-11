@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InStock._BLL.Models;
-using InStock._BLL.Services;
+using _BLL;
+using COMMON;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

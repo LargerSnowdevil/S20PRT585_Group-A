@@ -15,15 +15,15 @@ import { InventoryService} from './services/inventory.service';
 import { GetShopsComponent} from './get-shops/get-shops.component';
 import { GetShopComponent} from './get-single-shop/get-shop.component';
 import { AddEditShopsComponent} from './add-edit-shops/add-edit-shops.component';
-import { ItemSearchComponent } from './item-search/item-search.component';
 import { GetItemComponent} from './get-single-item/get-item.component';
 import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
 import { GetInventoryComponent} from './get-single-inventory/get-inventory.component';
 import { AddEditInventoryComponent} from './add-edit-inventory/add-edit-inventory.component';
-import { MailComponent} from'./Email-Subscribers/mail.component';
 import { AddEmailComponent } from "./subscribe/add-email.component";
 import { EmailService } from "./services/email.service";
 import { SendEmailComponent } from "./send-email/send-email.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -34,8 +34,6 @@ import { SendEmailComponent } from "./send-email/send-email.component";
     GetItemsComponent,
     AddEditItemsComponent,
     GetItemComponent,
-    MailComponent,
-    ItemSearchComponent,
     GetShopsComponent,
     GetShopComponent,
     AddEditShopsComponent,
@@ -43,11 +41,13 @@ import { SendEmailComponent } from "./send-email/send-email.component";
     GetInventoryComponent,
     AddEditInventoryComponent,
     AddEmailComponent,
-    SendEmailComponent
+    SendEmailComponent,
+
 
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -61,18 +61,15 @@ import { SendEmailComponent } from "./send-email/send-email.component";
      { path: 'edit-shop/:id', component: AddEditShopsComponent },
      { path: 'add-shop', component: AddEditShopsComponent },
      { path: 'shop/:id', component: GetShopComponent },
-     { path: 'item-search', component: ItemSearchComponent },
      { path: 'get-inventories', component : GetInventoriesComponent},
      { path: 'get-inventory', component : GetInventoryComponent},
      { path: 'edit-inventory/:id', component : AddEditInventoryComponent},
      { path: 'add-inventory', component : AddEditInventoryComponent},
-     { path: 'mail', component : MailComponent},
-     { path: 'add-email', component : AddEmailComponent},
-     { path: 'send-email', component : SendEmailComponent},
-     { path: 'send-email/:id', component : SendEmailComponent},
-
-     { path: '**', redirectTo: '/' }
-    ])
+      { path: 'add-email', component : AddEmailComponent},
+      { path: 'send-email', component : SendEmailComponent},
+      { path: 'send-email/:id', component : SendEmailComponent}
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     ItemsService,

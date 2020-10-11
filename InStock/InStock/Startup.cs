@@ -1,6 +1,6 @@
-using InStock._BLL.Services;
-using InStock._DAL.Models;
-using InStock._DAL.Services;
+
+using _BLL;
+using _DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,22 +33,22 @@ namespace InStock
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddDbContext<ItemContext>(optionns =>
             optionns.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IMailService, MailService>();
+            //BLL Services
             services.AddScoped<IMailServiceBll, MailServiceBll>();
-
-            services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemServiceBll, ItemServiceBll>();
-
-            services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IShopServiceBll, ShopServiceBll>();
-
-            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IInventoryServiceBll, InventoryServiceBll>();
-
+            services.AddScoped<EmailServiceBll, EmailServiceBll>();
+            //DAL Services
+            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IEEmailService, EmailService>();
-            services.AddScoped<EEmailServiceBll, EmailServiceBll>();
 
-            services.AddSwaggerGen(c => {
+
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
             });
         }
