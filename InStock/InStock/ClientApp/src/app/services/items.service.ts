@@ -37,16 +37,10 @@ export class ItemsService {
       catchError(this.errorHandler)
     );
 }
-  
 
 
-addItem(formdata) {
-  return this.http.post<any>(this.myAppUrl + this.myApiUrl, formdata)
-  .pipe(
-    //Todo this is causing the multiple requests change it back to 1 retry when i fix the 500 responce errors
-    retry(0),
-    catchError(this.errorHandler)
-  );
+addItem(item) : Observable<Items> {
+  return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions);
 }
 
 editItemById(itemId: number, formdata) {

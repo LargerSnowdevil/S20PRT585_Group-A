@@ -17,6 +17,6 @@ namespace _DAL
 
         public List<Inventory> Inventory { get; set; }
  
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using InStock._BLL.Services;
-using InStock._BLL.Models;
+using _BLL;
+using COMMON;
 using System.IO;
-using InStock.models;
 
 namespace InStock.Controllers
 {
@@ -41,26 +40,17 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, [FromForm] ItemImgUpViewModel item)
+        public async Task<IActionResult> PutItem(int id, [FromBody] ItemBll item)
         {
             if (id != item.Id)
             {
                 return BadRequest();
             }
-
-            byte[] img = null;
-            using (var sr = item.Image.OpenReadStream())
-            using (var ms = new MemoryStream())
-            {
-                sr.CopyTo(ms);
-                img = ms.ToArray();
-            }
-
             var blItem = new ItemBll
             {
                 Id = item.Id,
                 Name = item.Name,
-                Image = Convert.ToBase64String(img)
+                Image = item.Image.Substring(item.Image.IndexOf(",") + 1)
             };
 
             await _itemService.PutItem(id, blItem);
@@ -72,21 +62,21 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<ItemBll>> PostItem([FromForm] ItemImgUpViewModel item)
+        public async Task<ActionResult<ItemBll>> PostItem([FromBody] ItemBll item)
         {
-            byte[] img = null;
-            using (var sr = item.Image.OpenReadStream())
-            using (var ms = new MemoryStream())
-            {
-                sr.CopyTo(ms);
-                img = ms.ToArray();
-            }
+            //byte[] img = null;
+            //using (var sr = item.Image.OpenReadStream())
+            //using (var ms = new MemoryStream())
+            //{
+            //    sr.CopyTo(ms);
+            //    img = ms.ToArray();
+            //}
 
             var blItem = new ItemBll
             {
                 Id = item.Id,
                 Name = item.Name,
-                Image = Convert.ToBase64String(img)
+                Image = item.Image.Substring(item.Image.IndexOf(",") + 1)
             };
 
             await _itemService.PostItem(blItem);

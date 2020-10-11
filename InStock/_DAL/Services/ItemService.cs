@@ -51,7 +51,7 @@ namespace _DAL
             {
                 Id = efItem.ItemId,
                 Name = efItem.Name,
-                Image = Convert.ToBase64String(efItem.Image)
+                Image = efItem.Image
             };
 
             return retItem;
@@ -68,7 +68,7 @@ namespace _DAL
                 {
                     Id = item.ItemId,
                     Name = item.Name,
-                    Image = Convert.ToBase64String(item.Image)
+                    Image = item.Image
                 });
             }
 
@@ -82,7 +82,7 @@ namespace _DAL
             {
                 ItemId = item.Id,
                 Name = item.Name,
-                Image = Convert.FromBase64String(item.Image)
+                Image = item.Image
             };
 
             _context.Items.Add(efItem);
@@ -97,7 +97,7 @@ namespace _DAL
             if (efItem != null)
             {
                 efItem.Name = item.Name;
-                efItem.Image = Convert.FromBase64String(item.Image);
+                efItem.Image = item.Image;
 
                 _context.Items.Update(efItem);
                 await _context.SaveChangesAsync();

@@ -13,22 +13,27 @@ import { Observable } from 'rxjs';
 })
 export class AddEditItemsComponent implements OnInit {
   imageFile: File = null;
+  itemImage: any = null;
+  messages: string[] = [];
   itemForm: FormGroup;
   title: string;
   id: number;
-  fname:string;
+  isImageSaved: boolean;
   errorMessage: any;
-  existingItem :Items;
-  shops$: Observable<Shops[]>;
+  existingItem :Items;   
+  items$: Observable<Items[]>;
   private sub: any;
+  // Maximum file size allowed to be uploaded = 1MB
+
   constructor(private _itemService: ItemsService,private shopService: ShopsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
-    this.fname="name";
+
    
    
     this.itemForm = this.formBuilder.group({  
       id: 0,  
       name: ['', [Validators.required]],
+      image: ['']
   })   
     }
 
@@ -37,7 +42,6 @@ export class AddEditItemsComponent implements OnInit {
       this.id = +params['id']; 
   
    });
-   this.shops$ = this.shopService.getShops();
     if (this.id > 0) {  
       this.title = "Edit";  
       this._itemService.getItemById(this.id)
@@ -54,37 +58,19 @@ export class AddEditItemsComponent implements OnInit {
       return;
     }
     if (this.title == "Add") {
-      var formData: any = new FormData();
-      formData.append("name", this.itemForm.get('name').value);
-      formData.append("image", this.imageFile, this.imageFile.name);
-
-     //console.log(formData.getAll("name"))
-     //console.log(formData.getAll("image"))
-
-      this._itemService.addItem(formData)
-      .subscribe((data) => {
-        this._router.navigate(['/get-items']);
-      });
-     
+      this.readAndUploadFile(this.itemImage);
 }  
 
 else if (this.title == "Edit") {  
-  var formData: any = new FormData();
-  formData.append("name", this.itemForm.get('name').value);
-  formData.append("image", this.imageFile, this.imageFile.name);
 
-  let item: Items = {
-    id: this.existingItem.id,
-    name: this.itemForm.get('name').value,
-    image: this.imageFile
-  };
-  this._itemService.editItemById(item.id, item)
-        .subscribe((data) => {
-          this._router.navigate(['/get-items']);
-        });
+  this.readAndUploadFile(this.itemImage);
+  
 }  
 } 
-
+removeImage() {
+  this.itemImage = null;
+  this.isImageSaved = false;
+}
   
 cancel() {  
         this._router.navigate(['/get-items']);  
@@ -93,9 +79,44 @@ cancel() {
     get name() { return this.itemForm.get('name'); }
     get image() { return this.itemForm.get('file'); }
 
-    imageInputChanged(event) {
-      this.imageFile = event.target.files[0];
-      //console.log(this.imageFile);
-    }
+
+    private readAndUploadFile(itemImage: any) {
+      let item = new Items();
+     
+        item.name = this.itemForm.get('name').value;
+      let reader = new FileReader();
+      
+      // Setup onload event for reader
+      reader.onload = () => {
+          // Store base64 encoded representation of file
+          item.image = reader.result.toString();
+          this.isImageSaved = true;
+          // POST to server
+          this._itemService.addItem(item).subscribe(resp => { 
+              this.messages.push("Upload complete");
+              this._router.navigate(['/get-items']); });
+      }
+      
+      // Read the file
+      reader.readAsDataURL(itemImage);
+  }
+  uploadFile(): void {
+    this.readAndUploadFile(this.itemImage);
+}
+    onFileChange(event) {
+     const MAX_SIZE: number = 1048576;
+      this.itemImage = null;
+      if (event.target.files && event.target.files.length > 0) {
+          // Don't allow file sizes over 1MB
+          if (event.target.files[0].size < MAX_SIZE) {
+              // Set theFile property
+              this.itemImage = event.target.files[0];
+          }
+          else {
+              // Display error message
+              this.messages.push("File: " + event.target.files[0].name + " is too large to upload.");
+          }
+      }
+  }
 
 }
