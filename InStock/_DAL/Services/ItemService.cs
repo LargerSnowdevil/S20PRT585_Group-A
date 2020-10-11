@@ -2,6 +2,7 @@
 using _DAL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,6 +51,7 @@ namespace _DAL
             {
                 Id = efItem.ItemId,
                 Name = efItem.Name,
+                Image = efItem.Image
             };
 
             return retItem;
@@ -66,6 +68,7 @@ namespace _DAL
                 {
                     Id = item.ItemId,
                     Name = item.Name,
+                    Image = item.Image
                 });
             }
 
@@ -74,11 +77,12 @@ namespace _DAL
 
         public async Task PostItem(ItemBll item)
         {
-            //Todo ensure this method runs correctly im not great with async calls
+            //Todo set defualt image if none is supplyed
             var efItem = new Item
             {
                 ItemId = item.Id,
                 Name = item.Name,
+                Image = item.Image
             };
 
             _context.Items.Add(efItem);
@@ -93,6 +97,7 @@ namespace _DAL
             if (efItem != null)
             {
                 efItem.Name = item.Name;
+                efItem.Image = item.Image;
 
                 _context.Items.Update(efItem);
                 await _context.SaveChangesAsync();

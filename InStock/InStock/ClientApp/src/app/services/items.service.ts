@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Items } from '../models/items';
+import { Item } from '../models/items';
 
 @Injectable({
   providedIn: 'root'
@@ -29,26 +30,21 @@ export class ItemsService {
       catchError(this.errorHandler)
     );
   }
-  getItemById(itemId: number): Observable<Items> {
-    return this.http.get<Items>(this.myAppUrl + this.myApiUrl + itemId)
+  getItemById(itemId: number): Observable<Item> {
+    return this.http.get<Item>(this.myAppUrl + this.myApiUrl + itemId)
     .pipe(
       retry(1),
       catchError(this.errorHandler)
     );
 }
-  
 
 
-addItem(item): Observable<Items> {
-  return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions)
-  .pipe(
-    retry(1),
-    catchError(this.errorHandler)
-  );
+addItem(item) : Observable<Items> {
+  return this.http.post<Items>(this.myAppUrl + this.myApiUrl, JSON.stringify(item), this.httpOptions);
 }
 
-editItemById(itemId: number, item): Observable<Items> {
-  return this.http.put<Items>(this.myAppUrl + this.myApiUrl + itemId, JSON.stringify(item), this.httpOptions)
+editItemById(itemId: number, formdata) {
+  return this.http.put<any>(this.myAppUrl + this.myApiUrl + itemId, formdata)
   .pipe(
     retry(1),
     catchError(this.errorHandler)

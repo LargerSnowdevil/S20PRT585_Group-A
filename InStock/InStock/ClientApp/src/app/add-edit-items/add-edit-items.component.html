@@ -1,36 +1,26 @@
 <h1>{{title}}</h1>
 <h3>Item</h3>
 <div class="container">
-<form [formGroup]="itemForm" (ngSubmit)="save()"  #formDir="ngForm" novalidate >
+<form [formGroup]="itemForm"  #formDir="ngForm" novalidate >
     <div class="form-group row">
         <label class=" control-label col-md-12 ">Name</label>
         <div class="col-md-4">
             <input class="form-control" type="text" formControlName="name" >
+        </div>
+        <label class=" control-label col-md-12 "></label>
+        <div class="col-md-8">
+            <label>Upload An Image (&lt; 1MB)</label><br/>
+            <input class="form-control" type="file" (change)="onFileChange($event)">
+            <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>
         </div>
         <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
             Name is required.
         </span>
     </div>
 
-    <!-- <div class="form-group row">
-        <label class="control-label col-md-12" for="quantity">Shop</label>
-        <div class="col-md-4">
-            <select class="form-control" type="number" formControlName="shopId" >
-                <option>Select</option>
-                <option  *ngFor="let shop of  (shops$ | async)" [ngValue]=shop.shopId>
-                    {{shop.name}}
-                </option>
-            </select>
-       </div>
-        <span class="text-danger" *ngIf="shopId.invalid && formDir.submitted">
-            Shop is required
-        </span>
-    </div> -->
-
-
     <div class="form-group">
-        <button type="submit" class="btn btn-success ">Save</button>
-        <button class="btn btn-secondary float-left"(click)="cancel()">Cancel</button>
+        <button type="button"  [disabled]="!itemImage" class="btn btn-success" (click)="save()">Save</button>
+        <button type="button" class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
     </div>
 </form>
 </div>

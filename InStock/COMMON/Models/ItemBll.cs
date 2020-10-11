@@ -9,10 +9,12 @@ namespace COMMON
 {
     public class ItemBll
     {
-            public int Id { get; set; }
+        public int Id { get; set; }
 
-            [Column(TypeName = "varchar(16)")]
-            public string Name { get; set; }
+        [Column(TypeName = "varchar(32)")]
+        public string Name { get; set; }
+
+        public string Image { get; set; }
  
     }
 }
