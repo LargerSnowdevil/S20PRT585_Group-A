@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';  
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';  
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../services/items.service';  
 import { Items } from '../models/items';
-import { ShopsService } from '../services/shops.service';
-import { Shops } from '../models/shop';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 @Component({
@@ -28,7 +26,7 @@ export class AddEditItemsComponent implements OnInit {
   private sub: any;
   // Maximum file size allowed to be uploaded = 1MB
 
-  constructor(private _itemService: ItemsService,private shopService: ShopsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
+  constructor(private _itemService: ItemsService,private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
     this.fname="";
    
@@ -100,8 +98,7 @@ cancel() {
      item.id = this.existingItem.id;
       item.name = this.itemForm.get('name').value;
       item.image= this.itemImage;
-      
-        // POST to server
+
         this._itemService.editItemById(this.id, item).subscribe(resp => { 
         
             this._router.navigate(['/get-items']); });
@@ -138,10 +135,6 @@ cancel() {
             image.onload = rs => {
                 const img_height = rs.currentTarget['height'];
                 const img_width = rs.currentTarget['width'];
-
-                //console.log(img_height, img_width);
-
-
                 if (img_height > max_height && img_width > max_width) {
                     this.imageError =
                         'Maximum dimentions allowed ' +
