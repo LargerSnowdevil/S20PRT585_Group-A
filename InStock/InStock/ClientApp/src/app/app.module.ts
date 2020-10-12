@@ -24,6 +24,7 @@ import { AddEmailComponent } from "./subscribe/add-email.component";
 import { EmailService } from "./services/email.service";
 import { SendEmailComponent } from "./send-email/send-email.component";
 import { AgmCoreModule } from '@agm/core';
+import { TestComponent } from "./test/test.component";
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AgmCoreModule } from '@agm/core';
     GetInventoryComponent,
     AddEditInventoryComponent,
     AddEmailComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    TestComponent
 
     ],
   imports: [
@@ -71,7 +73,8 @@ import { AgmCoreModule } from '@agm/core';
      { path: 'mail', component : MailComponent},
       { path: 'add-email', component : AddEmailComponent},
       { path: 'send-email', component : SendEmailComponent},
-      { path: 'send-email/:id', component : SendEmailComponent}
+      { path: 'send-email/:id', component : SendEmailComponent},
+      { path: 'test', component : TestComponent}
     ])
   ],
   providers: [

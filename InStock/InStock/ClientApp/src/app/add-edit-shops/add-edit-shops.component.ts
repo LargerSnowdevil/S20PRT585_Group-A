@@ -58,8 +58,8 @@ export class AddEditShopsComponent implements OnInit {
     address:['', [Validators.required]],
     // lat:this.latitude,
     // long:this.longitude,
-    latitude:this.latitude,
-    longitude:this.longitude
+    lat:this.latitude,
+    long:this.longitude
     // lat:['', ],
     // long:['', ],
     
@@ -82,9 +82,8 @@ export class AddEditShopsComponent implements OnInit {
       this.existingShop = data,
       this.shopForm.controls['name'].setValue(data.name),
       this.shopForm.controls['contactNumber'].setValue(data.contactNumber),
-      this.shopForm.controls['address'].setValue(data.address),
-      this.shopForm.controls['long'].setValue(data.long),
-      this.shopForm.controls['lat'].setValue(data.lat)
+      this.shopForm.controls['address'].setValue(data.address)
+     
 
     ));
 } 
@@ -111,10 +110,8 @@ export class AddEditShopsComponent implements OnInit {
         name: this.shopForm.get('name').value,
         contactNumber: this.shopForm.get('contactNumber').value,
         address: this.shopForm.get('address').value,
-        // long: this.shopForm.get('long').value,
-        // lat: this.shopForm.get('lat').value,
-        long: this.shopForm.get('longitude').value,
-        lat: this.shopForm.get('latitude').value,
+        long: this.latitude,
+        lat: this.longitude,
         
       };
       
@@ -132,8 +129,8 @@ else if (this.title == "Edit") {
     name: this.shopForm.get('name').value, 
     address: this.shopForm.get('address').value,
     contactNumber: this.shopForm.get('contactNumber').value,
-    lat: this.shopForm.get('lat').value,
-    long: this.shopForm.get('long').value,
+    long: this.latitude,
+    lat: this.longitude,
   };
   console.log(shop)
   this.shopService.editShopById(shop.shopId, shop)

@@ -1,3 +1,19 @@
 agm-map {
-    height: 300px;
+    height: 500px;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(400px, 400px) minmax(400px, 600px);
+  }
+  
+  main>div {
+    padding: 1em;
+  }
+  
+  .div-B {
+    grid-column: 2;
+  }
+  .div-A {
+    grid-column: 1;
   }
