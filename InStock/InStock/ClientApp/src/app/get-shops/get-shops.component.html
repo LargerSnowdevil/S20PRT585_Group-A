@@ -4,12 +4,11 @@
 <p>
   <a [routerLink]="['/add-shop/']" class="btn btn-primary float-right mb-3">Add Shop</a>
 </p>
-<!-- <agm-map [latitude]="lat" [longitude]="long">
-  <agm-marker *ngFor="let shop of (shops$ | async)">
+<agm-map [latitude]="lat" [longitude]="long">
+  <agm-marker *ngFor="let shop of (shops$ | async)"
   [latitude]="shop.lat"
-  [longitude]="shop.long"
-  </agm-marker>
-</agm-map> -->
+  [longitude]="shop.long"></agm-marker>
+</agm-map>
 <div #mapContainer id="map"></div>
   
 
