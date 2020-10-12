@@ -25,8 +25,6 @@ import { SendEmailComponent } from "./send-email/send-email.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AgmCoreModule} from '@agm/core';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +44,9 @@ import {AgmCoreModule} from '@agm/core';
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    AgmCoreModule.forRoot({apiKey:'AIzaSyCpnRBNPG4ASi7Ak4V6mAWOHAiwvW-mFm4',
+    AgmCoreModule.forRoot({
+      
+      apiKey:'AIzaSyCpnRBNPG4ASi7Ak4V6mAWOHAiwvW-mFm4',
     libraries: ['places']}),
     HttpClientModule,
     FormsModule,
