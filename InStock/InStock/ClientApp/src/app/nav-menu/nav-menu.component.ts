@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // For MDB Angular Free
-import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+
 
 @Component({
   selector: 'app-nav-menu',

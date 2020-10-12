@@ -67,7 +67,8 @@ import {AgmCoreModule} from '@agm/core';
      { path: 'add-inventory', component : AddEditInventoryComponent},
       { path: 'add-email', component : AddEmailComponent},
       { path: 'send-email', component : SendEmailComponent},
-      { path: 'send-email/:id', component : SendEmailComponent}
+      { path: 'send-email/:id', component : SendEmailComponent},
+      { path: '**', redirectTo:'/'}
     ]),
     BrowserAnimationsModule
   ],
