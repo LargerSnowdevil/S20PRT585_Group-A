@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0006: Metadata file 'C:\Users\GuzziFuzzy\S20PRT585_Group-A\InStock\_BLL\bin\Debug\netstandard2.0\_BLL.dll' could not be found
+dotnet_diagnostic.CS0006.severity = none

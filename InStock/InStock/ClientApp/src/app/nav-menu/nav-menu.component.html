@@ -1,9 +1,60 @@
+<!--Navbar-->
 <header>
-  <nav
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    InStock
+  </a>
+
+  <button class="navbar-toggler" type="button"
+  (click)="toggleNavbar()">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+
+
+  <div class="collapse navbar-collapse"
+  [ngClass]="{ 'show': navbarOpen }">
+  <ul class="navbar-nav mr-auto">
+      <li class="nav-item " [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/get-items']"
+          >Manage Items</a
+        >
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/get-shops']"
+          >Manage Shops</a
+        >
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/get-inventories']"
+          >Manage Inventory</a
+        >
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/add-email']"
+          >Subscribe</a
+        >
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/send-email']"
+          >Email Subscribers</a
+        >
+
+      </li>
+    </ul>
+  </div>
+</nav>
+   
+      
+
+  
+</header>
+
+  <!-- <nav
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">InStock</a>
+    <div class="container ">
+      <a class="navbar-brand " [routerLink]="['/']">InStock</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -20,13 +71,7 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
+          
          
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/get-items']"
@@ -52,9 +97,12 @@
             <a class="nav-link text-dark" [routerLink]="['/send-email']"
               >Email Subscribers</a
             >
+
           </li>
+          
+         
         </ul>
       </div>
     </div>
-  </nav>
-</header>
+  </nav> -->
+

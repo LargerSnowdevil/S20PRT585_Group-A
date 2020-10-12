@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+// For MDB Angular Free
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,8 +13,11 @@ export class NavMenuComponent {
   collapse() {
     this.isExpanded = false;
   }
+  navbarOpen = false;
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
+
+  
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ItemsService } from '../services/items.service';
 import { Items } from '../models/items';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-get-item',
@@ -11,19 +12,22 @@ import { Items } from '../models/items';
 })
 export class GetItemComponent implements OnInit {
   item$: Observable<Items>;
+  imgData: string;
   itemId: number;
   constructor(private _itemService: ItemsService, private avRoute: ActivatedRoute) {
     const idParam = 'id';
     if (this.avRoute.snapshot.params[idParam]) {
       this.itemId = this.avRoute.snapshot.params[idParam];
     }
+
+    this.imgData = '';
   }
 
   ngOnInit() {
     this.loadItem();
   }
   loadItem() {
-    this.item$ = this._itemService.getItemById(this.itemId);
+  this.item$ = this._itemService.getItemById(this.itemId);
   }
 
 }

@@ -1,8 +1,11 @@
-<h1>Email subscription</h1>
+<br>
+<br>
+<br>
+<h1>Subscribe to Our NewsLetter</h1>
 <div class="container">
 <form [formGroup]="mailinfoForm" (ngSubmit)="save()"  #formDir="ngForm" novalidate >
     <div class="form-group row">
-        <label class=" control-label col-md-12 ">EmailAddress</label>
+        <label class=" control-label col-md-12 ">Email Address</label>
         <div class="col-md-4">
             <input class="form-control" type="text" formControlName="emailAddress" >
         </div>
@@ -10,7 +13,7 @@
     
     
     <div class="form-group">
-        <button type="submit" class="btn btn-success ">subscribe</button>
+        <button type="submit" class="btn btn-success ">Subscribe</button>
     </div>
 </form>
 </div>

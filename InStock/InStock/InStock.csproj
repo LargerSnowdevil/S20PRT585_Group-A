@@ -39,25 +39,21 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="Data\**" />
-    <Compile Remove="Models\**" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="Data\**" />
-    <Content Remove="Models\**" />
     <EmbeddedResource Remove="Data\**" />
-    <EmbeddedResource Remove="Models\**" />
     <None Remove="$(SpaRoot)**" />
     <None Remove="Data\**" />
-    <None Remove="Models\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200923092102_latest.cs" />
-    <Compile Remove="Migrations\20200923092102_latest.Designer.cs" />
-    <Compile Remove="Migrations\20200928085038_third.cs" />
-    <Compile Remove="Migrations\20200928085038_third.Designer.cs" />
-    <Compile Remove="Migrations\20201005034056_searchChange.cs" />
-    <Compile Remove="Migrations\20201005034056_searchChange.Designer.cs" />
+    <ProjectReference Include="..\_BLL\_BLL.csproj" />
+    <ProjectReference Include="..\_DAL\_DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

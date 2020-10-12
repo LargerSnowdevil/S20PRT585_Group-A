@@ -19,11 +19,11 @@ import { GetItemComponent} from './get-single-item/get-item.component';
 import { GetInventoriesComponent} from './get-inventories/get-inventories.component';
 import { GetInventoryComponent} from './get-single-inventory/get-inventory.component';
 import { AddEditInventoryComponent} from './add-edit-inventory/add-edit-inventory.component';
-import { MailComponent} from'./Email-Subscribers/mail.component';
 import { AddEmailComponent } from "./subscribe/add-email.component";
 import { EmailService } from "./services/email.service";
 import { SendEmailComponent } from "./send-email/send-email.component";
-import { AgmCoreModule } from '@agm/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -34,7 +34,6 @@ import { AgmCoreModule } from '@agm/core';
     GetItemsComponent,
     AddEditItemsComponent,
     GetItemComponent,
-    MailComponent,
     GetShopsComponent,
     GetShopComponent,
     AddEditShopsComponent,
@@ -42,17 +41,15 @@ import { AgmCoreModule } from '@agm/core';
     GetInventoryComponent,
     AddEditInventoryComponent,
     AddEmailComponent,
-    SendEmailComponent
+    SendEmailComponent,
+
 
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    
     HttpClientModule,
     FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCpnRBNPG4ASi7Ak4V6mAWOHAiwvW-mFm4',
-      libraries: ['places']
-    }),
     ReactiveFormsModule,
     RouterModule.forRoot([
      { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -68,11 +65,11 @@ import { AgmCoreModule } from '@agm/core';
      { path: 'get-inventory', component : GetInventoryComponent},
      { path: 'edit-inventory/:id', component : AddEditInventoryComponent},
      { path: 'add-inventory', component : AddEditInventoryComponent},
-     { path: 'mail', component : MailComponent},
       { path: 'add-email', component : AddEmailComponent},
       { path: 'send-email', component : SendEmailComponent},
       { path: 'send-email/:id', component : SendEmailComponent}
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     ItemsService,

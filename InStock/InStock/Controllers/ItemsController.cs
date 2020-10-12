@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using InStock._BLL.Services;
-using InStock._BLL.Models;
+using _BLL;
+using COMMON;
+using System.IO;
 
 namespace InStock.Controllers
 {
@@ -39,14 +40,20 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, ItemBll item)
+        public async Task<IActionResult> PutItem(int id, [FromBody] ItemBll item)
         {
             if (id != item.Id)
             {
                 return BadRequest();
             }
+            var blItem = new ItemBll
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Image = item.Image.Substring(item.Image.IndexOf(",") + 1)
+            };
 
-            await _itemService.PutItem(id, item);
+            await _itemService.PutItem(id, blItem);
 
             return NoContent();
         }
@@ -55,11 +62,20 @@ namespace InStock.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<ItemBll>> PostItem(ItemBll item)
+        public async Task<ActionResult<ItemBll>> PostItem([FromBody] ItemBll item)
         {
-            await _itemService.PostItem(item);
+      
 
-            return CreatedAtAction("GetItem", new { id = item.Id }, item);
+            var blItem = new ItemBll
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Image = item.Image.Substring(item.Image.IndexOf(",") + 1)
+            };
+
+            await _itemService.PostItem(blItem);
+
+            return CreatedAtAction("GetItem", new { id = blItem.Id }, blItem);
         }
 
         // DELETE: api/Items/5
