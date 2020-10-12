@@ -3,106 +3,59 @@
 <br>
 <h1>{{title}}</h1>
 <h3>Shop</h3>
-<div class="container">
-<form [formGroup]="shopForm" (ngSubmit)="save()"  #formDir="ngForm" novalidate >
-    <div class="form-group row">
-        <label class=" control-label col-md-12 ">Shop Name</label>
-        <div class="col-md-4">
-            <input class="form-control" type="text" formControlName="name" >
-        </div>
-        <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
-            Shop Name is required.
-        </span>
-    </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="contactNumber">ContactNumber</label>
-        <div class="col-md-4">
-            <input class="form-control" type="text" formControlName="contactNumber" >
-        </div>
-        <span class="text-danger" *ngIf="contactNumber.invalid && formDir.submitted">
-            contactNumber is required
-        </span>
-    </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="address">Address</label>
-        <div class="col-md-4">
-            <input class="form-control" type="text" formControlName="address">
-        </div>
-        <span class="text-danger" *ngIf="address.invalid && formDir.submitted">
-            Address is required
-        </span>
-    </div>
-    <!-- <div class="form-group row">
-        <label class="control-label col-md-12" for="lat">Latitude</label>
-        <div class="col-md-4">
-            <input class="form-control" type="number" formControlName="lat">
-        </div>
-        <span class="text-danger" *ngIf="lat.invalid && formDir.submitted">
-            Lat is required
-        </span>
-    </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="long">longitude</label>
-        <div class="col-md-4">
-            <input class="form-control" type="number" formControlName="long">
-        </div>
-        <span class="text-danger" *ngIf="long.invalid && formDir.submitted">
-            long is required
-        </span>
-    </div> -->
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="latitude">Latitude:{{latitude}}</label>
-    </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12" for="longitude">Longitude: {{longitude}}</label>
-    </div>
-      <agm-map 
-            [latitude]="latitude" 
-            [longitude]="longitude" 
-            [zoom]="zoom" 
-            (mapClick)="onChoseLocation($event)">
-        <agm-marker 
-            [latitude]="latitude" 
-            [longitude]="longitude"
-            *ngIf="locationChosen">
-
-        </agm-marker>
-    </agm-map>
-    <!-- <div class="form-group row">
-        <div>Latitude: {{latitude}}</div>
-        <div class="col-md-4">
-            <label class="form-control" type="number" formControlName="lat">
-        </div>
+<main>
+    <div class="panel div-A"><div class="container">
+        <form [formGroup]="shopForm" (ngSubmit)="save()"  #formDir="ngForm" novalidate >
+            <div class="form-group row">
+                <label class=" control-label col-md-12 ">Shop Name</label>
+                <div>
+                    <input class="form-control" type="text" formControlName="name" >
+                </div>
+                <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
+                    Shop Name is required.
+                </span>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-12" for="contactNumber">ContactNumber</label>
+                <div>
+                    <input class="form-control" type="text" formControlName="contactNumber" >
+                </div>
+                <span class="text-danger" *ngIf="contactNumber.invalid && formDir.submitted">
+                    contactNumber is required
+                </span>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-12" for="address">Address</label>
+                <div >
+                    <input class="form-control" type="text" formControlName="address">
+                </div>
+                <span class="text-danger" *ngIf="address.invalid && formDir.submitted">
+                    Address is required
+                </span>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-12"  for="latitude">Latitude:{{latitude}}</label>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-12"  for="longitude">Longitude: {{longitude}}</label>
+            </div>
         
-    </div> -->
-    <!-- <div class="form-group row">
-        <label class="control-label col-md-12" for="long">longitude</label>
-        <div class="col-md-4">
-            <class="form-control" type="number" formControlName="long">
-        </div>
-       
-    </div> -->
-    <!-- <div class="container">
-      
-        <div class="form-group">
-          <label>Enter address</label>
-          <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
-        </div>
-      
-        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-            (dragEnd)="markerDragEnd($event)"></agm-marker>
-        </agm-map>
-      
-        <h5>Address: {{saddress}}</h5>
-        <div>Latitude: {{latitude}}</div>
-        <div>Longitude: {{longitude}}</div>
-      </div> -->
-
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success ">Save</button>
-        <button class="btn btn-secondary float-left"(click)="cancel()">Cancel</button>
-    </div>
-</form>
-</div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success ">Save</button>
+                <button class="btn btn-secondary float-left"(click)="cancel()">Cancel</button>
+            </div>
+        </form>
+        </div></div>
+    <div class="panel div-B"><agm-map 
+        [latitude]="latitude" 
+        [longitude]="longitude" 
+        [zoom]="zoom" 
+        (mapClick)="onChoseLocation($event)">
+    <agm-marker 
+        [latitude]="latitude" 
+        [longitude]="longitude"
+        *ngIf="locationChosen">
+ 
+    </agm-marker>
+</agm-map></div>
+  </main>

@@ -6,6 +6,7 @@ import { Shops } from '../models/shop';
 import { Items } from '../models/items';
 import { Observable } from 'rxjs';
 import { ItemsService } from '../services/items.service'; 
+
 @Component({
   selector: 'app-add-edit-shops',
   templateUrl: './add-edit-shops.component.html',
@@ -16,8 +17,6 @@ export class AddEditShopsComponent implements OnInit {
   longitude: number;
   zoom:number;
   locationChosen = false;
- 
-
   shopForm: FormGroup;
   title: string;
   fshopId: number;
@@ -28,49 +27,36 @@ export class AddEditShopsComponent implements OnInit {
   flong:number;
   errorMessage: any;
   existingShop :Shops;
-  // @ViewChild('search',{ static: false })
-  // public searchElementRef: ElementRef;
+
   onChoseLocation(event) {
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
     this.locationChosen = true;
     console.log(event);
-   
-    
   }
   
-  
-  
-
   private sub: any;
   constructor(private shopService: ShopsService, private _itemService: ItemsService, private avRoute: ActivatedRoute, private formBuilder: FormBuilder,private _router: Router) {
     this.title="Add";
     this.fname=" ";
-    this.fcontactNumber=" "
-    this.faddress=" "
-    this.flong=this.longitude;
-    this.flat=this.latitude;
+    this.fcontactNumber=" ";
+    this.faddress=" ";
+    this.flong= 0.0;
+    this.flat= 0.0;
 
     this.shopForm = this.formBuilder.group({  
     shopId: 0,  
     name: ['', [Validators.required]],  
     contactNumber:['', [Validators.required]],
     address:['', [Validators.required]],
-    // lat:this.latitude,
-    // long:this.longitude,
-    latitude:this.latitude,
-    longitude:this.longitude
-    // lat:['', ],
-    // long:['', ],
-    
+    latitude:[''],
+    longitude:[''],
   })   
    }
   
   ngOnInit() {
      //load Places Autocomplete
      this.setCurrentLocation();
-
-
     this.sub = this.avRoute.params.subscribe(params => {
       this.fshopId = +params['id']; 
    })
@@ -111,14 +97,9 @@ export class AddEditShopsComponent implements OnInit {
         name: this.shopForm.get('name').value,
         contactNumber: this.shopForm.get('contactNumber').value,
         address: this.shopForm.get('address').value,
-        // long: this.shopForm.get('long').value,
-        // lat: this.shopForm.get('lat').value,
-        long: this.shopForm.get('longitude').value,
-        lat: this.shopForm.get('latitude').value,
-        
+        long: this.latitude,
+        lat: this.longitude,
       };
-      
-      console.log(shop)
       this.shopService.addShop(shop)
       .subscribe((data) => {
         this._router.navigate(['/get-shops']);
@@ -132,8 +113,8 @@ else if (this.title == "Edit") {
     name: this.shopForm.get('name').value, 
     address: this.shopForm.get('address').value,
     contactNumber: this.shopForm.get('contactNumber').value,
-    lat: this.shopForm.get('lat').value,
-    long: this.shopForm.get('long').value,
+    long: this.latitude,
+    lat: this.longitude,
   };
   console.log(shop)
   this.shopService.editShopById(shop.shopId, shop)

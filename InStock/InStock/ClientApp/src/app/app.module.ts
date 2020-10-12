@@ -23,6 +23,7 @@ import { AddEmailComponent } from "./subscribe/add-email.component";
 import { EmailService } from "./services/email.service";
 import { SendEmailComponent } from "./send-email/send-email.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AgmCoreModule} from '@agm/core';
 
 
 
@@ -42,12 +43,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddEditInventoryComponent,
     AddEmailComponent,
     SendEmailComponent,
-
-
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    
+    AgmCoreModule.forRoot({apiKey:'AIzaSyCpnRBNPG4ASi7Ak4V6mAWOHAiwvW-mFm4',
+    libraries: ['places']}),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
